@@ -16,8 +16,10 @@ namespace WAD_Server
 {
     public partial class Form1 : Form
     {
-        // Booking list
+        // Booking, Movie list
         List<Booking> bookingList = new List<Booking>();
+        List<Movie> movieList = new List<Movie>();
+        List<user> userList = new List<user>();
 
         Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         // Declare delegate
@@ -105,8 +107,17 @@ namespace WAD_Server
         #endregion
 
         // To list booking of specifc movie
+        #region listBooking() function
+        public void listBooking()
+        {
+            foreach (Booking booked in bookingList)
+            {
 
-        // To add movie
+            }
+        }
+        #endregion
+
+        // To add movie with textbox and image from picturebox
         #region addMovie() function
         public void addMovie()
         {
@@ -125,10 +136,13 @@ namespace WAD_Server
             //byte[] ar = new byte[ms.Length];
             //ms.Write(ar, 0, ar.Length);
 
+            //Movie newMovie = new Movie(title, movieType, price, imageFileName);
+            //movieList.Add(newMovie);
 
         }
         #endregion
 
+        // To open file dialog to upload image to picturebox
         #region uploadImage() function
         public void uploadImage()
         {
