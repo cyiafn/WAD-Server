@@ -10,11 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
+using System.IO;
 
 namespace WAD_Server
 {
     public partial class Form1 : Form
     {
+        // Booking list
+        List<Booking> bookingList = new List<Booking>();
+
         Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         // Declare delegate
         public delegate void SetTextCallback(string msg);
@@ -69,9 +73,83 @@ namespace WAD_Server
         }
         #endregion
 
+        // To load booking from text file
+        #region loadBooking() function
         public void loadBooking()
         {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Title = "Open Text File";
+            dlg.FileName = "BookingList.txt";
+            dlg.Filter = "TXT files|*.txt";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    int count = 0;
+                    string[] data = File.ReadAllLines(dlg.FileName);
+                    foreach (var line in data)
+                    {
+                        string[] temp = Convert.ToString(line).Split(';');
+                        Booking newBooking = new Booking(temp[0], temp[1], Convert.ToDouble(temp[2]), Convert.ToDateTime(temp[3]));
+                        bookingList.Add(newBooking);
+                        count++;
+                    }
+                    //txtDisplay.Text = "Number of records loaded: " + count;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: could not read file from disk.");
+                }
+            }
+        }
+        #endregion
+
+        // To list booking of specifc movie
+
+        // To add movie
+        #region addMovie() function
+        public void addMovie()
+        {
+            //string title = txtTitle.Text.Trim();
+            //string movieType = txtType.Text.Trim();
+            //double price = Convert.ToDouble(txtPrice.Text.Trim());
+            // Open file dialog to upload to picture box
+            // means uploadImage is used
+            //string imageFileName = txtImage.Text.Trim();
+
+            // Save/Write image to server based on the picture box
+            //pictureBox.Image.Save(@"Path", System.Drawing.Imaging.ImageFormat.Jpeg);
+
+            //MemoryStream ms = new MemoryStream();
+            //pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
+            //byte[] ar = new byte[ms.Length];
+            //ms.Write(ar, 0, ar.Length);
+
 
         }
+        #endregion
+
+        #region uploadImage() function
+        public void uploadImage()
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            // Image filters
+            ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    // Display image in picture box
+                    //PictureBox1.Image = new Bitmap(ofd.FileName);
+                    // Image file path
+                    //textBox1.Text = ofd.FileName;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: could not read image from disk.");
+                }
+            }
+        }
+        #endregion
     }
 }

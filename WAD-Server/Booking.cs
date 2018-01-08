@@ -9,15 +9,15 @@ namespace WAD_Server
     class Booking
     {
         public String TransactionId { get; set; }
-        public string[] Seats { get; set; }
-        public double TotalPrice { get; set; }
+        public String Seat { get; set; }
+        public double Price { get; set; }
         public DateTime DateTime { get; set; }
 
-        public Booking(String transactionId, string[] seats, double totalPrice, DateTime dateTime)
+        public Booking(String transactionId, string seat, double price, DateTime dateTime)
         {
             this.TransactionId = transactionId;
-            this.Seats = seats;
-            this.TotalPrice = totalPrice;
+            this.Seat = seat;
+            this.Price = price;
             this.DateTime = dateTime;
         }
     }
