@@ -68,5 +68,10 @@ namespace WAD_Server
             //txtResult.Text = msg;
         }
         #endregion
+
+        public void loadBooking()
+        {
+
+        }
     }
 }
