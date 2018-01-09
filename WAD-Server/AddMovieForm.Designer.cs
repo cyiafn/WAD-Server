@@ -175,7 +175,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTitle);
             this.Name = "AddMovieForm";
-            this.Text = "AddMovieForm";
+            this.Text = "Add Movie Form";
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

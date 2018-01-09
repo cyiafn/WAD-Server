@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace WAD_Server
 {
-    class Booking
+    public class Booking
     {
         public String TransactionId { get; set; }
         public String Seat { get; set; }
         public double Price { get; set; }
-        public DateTime DateTime { get; set; }
-        public List<Booking> bookingList { get; set; }
+        public String DateTime { get; set; }
+        //public List<Booking> bookingList = new List<Booking>();
 
-        public void initBooking(String transactionId, string seat, double price, DateTime dateTime)
+        public void initBooking(String transactionId, string seat, double price, String dateTime)
         {
             this.TransactionId = transactionId;
             this.Seat = seat;
@@ -22,6 +22,11 @@ namespace WAD_Server
             this.DateTime = dateTime;
         }
 
-        public List<Booking> GetList() { return bookingList; }
+        //public void addBooking(Booking book)
+        //{
+        //    bookingList.Add(book);
+        //}
+
+        //public List<Booking> GetList() { return bookingList; }
     }
 }

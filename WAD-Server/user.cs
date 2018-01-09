@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WAD_Server
 {
-    class user
+    public class user
     {
         private string firstName;
         private string middleName;

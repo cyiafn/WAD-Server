@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WAD_Server
 {
-    class Movie
+    public class Movie
     {
         public String Title { get; set; }
         public String MovieType { get; set; }

@@ -16,10 +16,8 @@ namespace WAD_Server
 {
     public partial class Form1 : Form
     {
-        // Booking, Movie list
-        List<Booking> bookingList = new List<Booking>();
-        List<Movie> movieList = new List<Movie>();
-        //List<user> userList = new List<user>();
+        Booking booking = new Booking();
+        Movie movie = new Movie();
 
         Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         // Declare delegate
@@ -31,6 +29,9 @@ namespace WAD_Server
 
             // Starts the server in the background
             runServer();
+
+            txtDisplay.ReadOnly = true;
+            txtDisplay.BackColor = System.Drawing.SystemColors.Window;
         }
 
         // Code to start the server
@@ -41,7 +42,7 @@ namespace WAD_Server
             IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, port);
             server.Bind(endpoint);
             server.Listen(10);
-            SetText("Waiting for clients on port " + port);
+            //SetText("Waiting for clients on port " + port);
             await Task.Run(() =>
             {
                 while (true)
@@ -54,7 +55,8 @@ namespace WAD_Server
                     }
                     catch (Exception)
                     {
-                        SetText("Connection falied on port " + port);
+                        MessageBox.Show("Connection failed on port " + port);
+                        //SetText("Connection falied on port " + port);
                     }
                 }
             });
@@ -71,7 +73,7 @@ namespace WAD_Server
                 this.Invoke(d, msg);
                 return;
             }
-            //txtResult.Text = msg;
+            txtDisplay.Text = msg;
         }
         #endregion
 
@@ -92,9 +94,8 @@ namespace WAD_Server
                     foreach (var line in data)
                     {
                         string[] temp = Convert.ToString(line).Split(';');
-                        Booking booking = new Booking();
-                        booking.initBooking(temp[0], temp[1], Convert.ToDouble(temp[2]), Convert.ToDateTime(temp[3]));
-                        booking.bookingList.Add(booking);
+                        booking.initBooking(temp[0], temp[1], Convert.ToDouble(temp[2]), temp[3]);
+                        variables.bookingList.Add(booking);
                         count++;
                     }
                     MessageBox.Show(count + " booking details has been loaded.");
@@ -114,7 +115,7 @@ namespace WAD_Server
             SaveFileDialog dlg = new SaveFileDialog();
             // default file name, file extension, filter file extension
             dlg.Title = "Open Text File";
-            dlg.FileName = "BookingList.txt";
+            dlg.FileName = "newBookingList.txt";
             dlg.Filter = "TXT files|*.txt";
 
             if (dlg.ShowDialog() == DialogResult.OK)
@@ -122,17 +123,11 @@ namespace WAD_Server
                 // Save document
                 //File.WriteAllText(dlg.FileName, info);
                 StreamWriter writer = new StreamWriter(dlg.OpenFile());
-                Booking details = new Booking();
-                List<Booking> calledList = details.GetList();
 
-                foreach (Booking book in calledList)
+                foreach (Booking book in variables.bookingList)
                 {
-                    writer.WriteLine("{0};{1};{2};{3};{4}", book.TransactionId, book.Seat, book.Price, book.DateTime);
+                    writer.WriteLine("{0};{1};{2};{3}", book.TransactionId, book.Seat, book.Price, book.DateTime);
                 }
-                    //foreach (var kvp in dict)
-                    //{
-                    //    writer.WriteLine(kvp.Key + ";" + kvp.Value);
-                    //}
                 writer.Dispose();
                 writer.Close();
                 MessageBox.Show("Booking list saved!");
@@ -140,24 +135,52 @@ namespace WAD_Server
         }
         #endregion
 
-        // To list booking of specifc movie
+        // To list all booking of movie
         #region listBooking() function
         public void listBooking()
         {
-            Booking details = new Booking();
-            List<Booking> calledList = details.GetList();
+            string s = null;
 
-            foreach (Booking book in calledList)
+            foreach (Booking book in variables.bookingList)
             {
                 // do logic
+                s += string.Format("{0}\t{1}\t{2}\t{3}", book.TransactionId, book.Seat, book.Price, book.DateTime) + Environment.NewLine;
             }
+            // to temporary display
+            SetText(s);
+            //MessageBox.Show(s);
         }
         #endregion
+
+        // To list all booking of specific movie
+        // code here
 
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
             AddMovieForm form2 = new AddMovieForm();
             form2.Show();
         }
+
+        private void btnUploadBooking_Click(object sender, EventArgs e)
+        {
+            loadBooking();
+        }
+
+        private void btnSaveBooking_Click(object sender, EventArgs e)
+        {
+            saveBooking();
+        }
+
+        private void btnListBooking_Click(object sender, EventArgs e)
+        {
+            listBooking();
+        }
+    }
+
+    public class variables
+    {
+        public static List<Booking> bookingList = new List<Booking>();
+        public static List<Movie> movieList = new List<Movie>();
+        public static List<user> userList = new List<user>();
     }
 }

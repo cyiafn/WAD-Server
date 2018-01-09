@@ -51,9 +51,7 @@ namespace WAD_Server
             // Add new movie to MovieList list
             Movie newMovie = new Movie();
             newMovie.initMovie(title, movieType, price, imageFileName);
-            //newMovie.MovieList = new List<Movie>();
-            newMovie.MovieList.Add(newMovie);
-
+            variables.movieList.Add(newMovie);
             MessageBox.Show(title + " has been added.");
             this.Close();
         }
