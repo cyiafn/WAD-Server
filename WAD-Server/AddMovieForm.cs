@@ -49,7 +49,8 @@ namespace WAD_Server
             bmp.Save(imageFileName, ImageFormat.Jpeg);
 
             // Add new movie to MovieList list
-            Movie newMovie = new Movie(title, movieType, price, imageFileName);
+            Movie newMovie = new Movie();
+            newMovie.initMovie(title, movieType, price, imageFileName);
             //newMovie.MovieList = new List<Movie>();
             newMovie.MovieList.Add(newMovie);
 

@@ -14,12 +14,14 @@ namespace WAD_Server
         public String ImageFileName { get; set; }
         public List<Movie> MovieList { get; set; }
 
-        public Movie(String title, String movieType, double price, String imageFileName)
+        public void initMovie(String title, String movieType, double price, String imageFileName)
         {
             this.Title = title;
             this.MovieType = movieType;
             this.Price = price;
             this.ImageFileName = imageFileName;
         }
+
+        public List<Movie> GetList() { return MovieList; }
     }
 }

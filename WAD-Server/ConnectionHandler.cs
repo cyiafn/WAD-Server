@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -47,6 +48,11 @@ namespace WAD_Server
                     if (input.ToLower() == "login")
                     {
                         Authorize();
+                    }
+
+                    else if (input.ToLower() == "request_movie")
+                    {
+                        sendMovieList();
                     }
 
                     else if (input.ToLower() == "terminate")
@@ -106,6 +112,34 @@ namespace WAD_Server
             {
                 // some error when reading line (client disconnected etc)
             }
+        }
+
+        // Send list of movies to client
+        public void sendMovieList()
+        {
+            ns = new NetworkStream(client);
+            writer = new StreamWriter(ns);
+            writer.AutoFlush = true;
+
+            Movie movieList = new Movie();
+            List<Movie> data = movieList.GetList();
+
+            byte[] fileNameByte;
+            byte[] fileData;
+            
+            foreach (Movie item in data)
+            {
+                fileNameByte = Encoding.ASCII.GetBytes(item.ImageFileName);
+                fileData = File.ReadAllBytes(item.ImageFileName);
+
+                // sends the title, filename, file data bytes and file data
+                writer.WriteLine(item.Title);
+                writer.WriteLine(item.ImageFileName);
+                writer.WriteLine(fileData.Length);
+                client.Send(fileData);
+            }
+            writer.WriteLine("sent");
+            writer.Close();
         }
     }
 }
