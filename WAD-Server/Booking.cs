@@ -12,13 +12,16 @@ namespace WAD_Server
         public String Seat { get; set; }
         public double Price { get; set; }
         public DateTime DateTime { get; set; }
+        public List<Booking> bookingList { get; set; }
 
-        public Booking(String transactionId, string seat, double price, DateTime dateTime)
+        public void initBooking(String transactionId, string seat, double price, DateTime dateTime)
         {
             this.TransactionId = transactionId;
             this.Seat = seat;
             this.Price = price;
             this.DateTime = dateTime;
         }
+
+        public List<Booking> GetList() { return bookingList; }
     }
 }

@@ -14,7 +14,6 @@ namespace WAD_Server
         private string email;
         private string password;
         private string dob;
-        // seanmarcus added
         private List<user> userList = new List<user>();
 
         public void intializeUser(string fName, string mName, string lName, string Email, string pw, string date)

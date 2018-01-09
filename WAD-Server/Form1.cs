@@ -92,11 +92,12 @@ namespace WAD_Server
                     foreach (var line in data)
                     {
                         string[] temp = Convert.ToString(line).Split(';');
-                        Booking newBooking = new Booking(temp[0], temp[1], Convert.ToDouble(temp[2]), Convert.ToDateTime(temp[3]));
-                        bookingList.Add(newBooking);
+                        Booking booking = new Booking();
+                        booking.initBooking(temp[0], temp[1], Convert.ToDouble(temp[2]), Convert.ToDateTime(temp[3]));
+                        booking.bookingList.Add(booking);
                         count++;
                     }
-                    //txtDisplay.Text = "Number of records loaded: " + count;
+                    MessageBox.Show(count + " booking details has been loaded.");
                 }
                 catch (Exception ex)
                 {
@@ -106,62 +107,49 @@ namespace WAD_Server
         }
         #endregion
 
-        // To list booking of specifc movie
-        #region listBooking() function
-        public void listBooking()
+        // Use of SaveFileDialog to be user friendly
+        #region saveBooking() function
+        public void saveBooking()
         {
-            foreach (Booking booked in bookingList)
-            {
+            SaveFileDialog dlg = new SaveFileDialog();
+            // default file name, file extension, filter file extension
+            dlg.Title = "Open Text File";
+            dlg.FileName = "BookingList.txt";
+            dlg.Filter = "TXT files|*.txt";
 
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                // Save document
+                //File.WriteAllText(dlg.FileName, info);
+                StreamWriter writer = new StreamWriter(dlg.OpenFile());
+                Booking details = new Booking();
+                List<Booking> calledList = details.GetList();
+
+                foreach (Booking book in calledList)
+                {
+                    writer.WriteLine("{0};{1};{2};{3};{4}", book.TransactionId, book.Seat, book.Price, book.DateTime);
+                }
+                    //foreach (var kvp in dict)
+                    //{
+                    //    writer.WriteLine(kvp.Key + ";" + kvp.Value);
+                    //}
+                writer.Dispose();
+                writer.Close();
+                MessageBox.Show("Booking list saved!");
             }
         }
         #endregion
 
-        // To add movie with textbox and image from picturebox
-        #region addMovie() function
-        public void addMovie()
+        // To list booking of specifc movie
+        #region listBooking() function
+        public void listBooking()
         {
-            //string title = txtTitle.Text.Trim();
-            //string movieType = txtType.Text.Trim();
-            //double price = Convert.ToDouble(txtPrice.Text.Trim());
-            // Open file dialog to upload to picture box
-            // means uploadImage is used
-            //string imageFileName = txtImage.Text.Trim();
+            Booking details = new Booking();
+            List<Booking> calledList = details.GetList();
 
-            // Save/Write image to server based on the picture box
-            //pictureBox.Image.Save(@"Path", System.Drawing.Imaging.ImageFormat.Jpeg);
-
-            //MemoryStream ms = new MemoryStream();
-            //pictureBox1.Image.Save(ms, System.Drawing.Imaging.ImageFormat.Jpeg);
-            //byte[] ar = new byte[ms.Length];
-            //ms.Write(ar, 0, ar.Length);
-
-            //Movie newMovie = new Movie(title, movieType, price, imageFileName);
-            //movieList.Add(newMovie);
-
-        }
-        #endregion
-
-        // To open file dialog to upload image to picturebox
-        #region uploadImage() function
-        public void uploadImage()
-        {
-            OpenFileDialog ofd = new OpenFileDialog();
-            // Image filters
-            ofd.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp)|*.jpg; *.jpeg; *.gif; *.bmp";
-            if (ofd.ShowDialog() == DialogResult.OK)
+            foreach (Booking book in calledList)
             {
-                try
-                {
-                    // Display image in picture box
-                    //PictureBox1.Image = new Bitmap(ofd.FileName);
-                    // Image file path
-                    //textBox1.Text = ofd.FileName;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: could not read image from disk.");
-                }
+                // do logic
             }
         }
         #endregion
