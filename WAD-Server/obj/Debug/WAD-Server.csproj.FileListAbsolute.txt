@@ -7,3 +7,12 @@ C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assi
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\Repo\WAD-Server\WAD-Server\obj\Debug\WAD-Server.csproj.CoreCompileInputs.cache
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\Repo\WAD-Server\WAD-Server\obj\Debug\WAD-Server.exe
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\Repo\WAD-Server\WAD-Server\obj\Debug\WAD-Server.pdb
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\bin\Debug\WAD-Server.exe.config
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\bin\Debug\WAD-Server.exe
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\bin\Debug\WAD-Server.pdb
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD-Server.csprojResolveAssemblyReference.cache
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.Properties.Resources.resources
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD-Server.csproj.GenerateResource.Cache
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD-Server.csproj.CoreCompileInputs.cache
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD-Server.exe
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD-Server.pdb

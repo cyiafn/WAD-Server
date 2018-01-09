@@ -71,6 +71,7 @@ namespace WAD_Server
             ns = new NetworkStream(client);
             reader = new StreamReader(ns);
             writer = new StreamWriter(ns);
+            writer.AutoFlush = true;
 
             try
             {
@@ -80,8 +81,7 @@ namespace WAD_Server
 
                 user userClass = new user();
                 List<user> calledList = userClass.GetList();
-
-                //bool authorized = calledList.Find(item => (item.getEmail() == email) && (item.getPassword() == password));
+                
                 foreach (user details in calledList)
                 {
                     if ((details.getEmail() == email) && (details.getPassword() == password))

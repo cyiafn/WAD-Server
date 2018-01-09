@@ -19,7 +19,7 @@ namespace WAD_Server
         // Booking, Movie list
         List<Booking> bookingList = new List<Booking>();
         List<Movie> movieList = new List<Movie>();
-        List<user> userList = new List<user>();
+        //List<user> userList = new List<user>();
 
         Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         // Declare delegate
@@ -37,7 +37,7 @@ namespace WAD_Server
         #region runServer()
         async void runServer()
         {
-            int port = 7000;
+            int port = 9000;
             IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, port);
             server.Bind(endpoint);
             server.Listen(10);
