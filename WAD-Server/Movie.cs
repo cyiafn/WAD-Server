@@ -12,6 +12,7 @@ namespace WAD_Server
         public String MovieType { get; set; }
         public double Price { get; set; }
         public String ImageFileName { get; set; }
+        public List<Movie> MovieList { get; set; }
 
         public Movie(String title, String movieType, double price, String imageFileName)
         {

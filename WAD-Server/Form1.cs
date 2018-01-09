@@ -165,5 +165,11 @@ namespace WAD_Server
             }
         }
         #endregion
+
+        private void btnAddMovie_Click(object sender, EventArgs e)
+        {
+            AddMovieForm form2 = new AddMovieForm();
+            form2.Show();
+        }
     }
 }
