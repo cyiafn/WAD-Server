@@ -118,8 +118,6 @@ namespace WAD_Server
                     writer.WriteLine("unauthorized");
                     writer.Flush();
                 }
-                writer.Close();
-                reader.Close();
             }
             catch (Exception)
             {
@@ -158,9 +156,6 @@ namespace WAD_Server
                 {
                     writer.WriteLine("success");
                 }
-                writer.Flush();
-                writer.Close();
-                reader.Close();
             }
             catch (Exception)
             {
@@ -235,8 +230,6 @@ namespace WAD_Server
             {
                 f.SetText("Exception occured when adding client booking.");
             }
-            reader.Close();
-            writer.Close();
 
             //bool exist = variables.bookingList.Contains(newBook);
             //if (exist)
@@ -275,8 +268,6 @@ namespace WAD_Server
             {
                 f.SetText("Exception occured when viewing client booking.");
             }
-            reader.Close();
-            writer.Close();
         }
 
         // To search movie list based on client input
@@ -318,8 +309,6 @@ namespace WAD_Server
             {
                 f.SetText("Exception occured when searching movie.");
             }
-            reader.Close();
-            writer.Close();
         }
     }
 }
