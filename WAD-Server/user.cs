@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WAD_Server
 {
-    public class user
+    public class user : IEquatable<user>
     {
         private string firstName;
         private string middleName;
@@ -25,6 +25,17 @@ namespace WAD_Server
             this.password = pw;
             this.dob = date;
         }
+
+        public bool Equals(user other)
+        {
+            return email.Equals(other.email);
+        }
+
+        public override int GetHashCode()
+        {
+            return email.GetHashCode();
+        }
+
         public string getFirstName() { return firstName; }
         public void setFirstName(string fName) { this.firstName = fName; }
         public string getMiddleName() { return middleName; }

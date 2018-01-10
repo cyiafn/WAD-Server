@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WAD_Server
 {
-    public class Booking
+    public class Booking : IEquatable<Booking>
     {
         public String TransactionId { get; set; }
         public String Seat { get; set; }
@@ -22,11 +22,14 @@ namespace WAD_Server
             this.DateTime = dateTime;
         }
 
-        //public void addBooking(Booking book)
-        //{
-        //    bookingList.Add(book);
-        //}
+        public bool Equals(Booking other)
+        {
+            return TransactionId.Equals(other.TransactionId);
+        }
 
-        //public List<Booking> GetList() { return bookingList; }
+        public override int GetHashCode()
+        {
+            return TransactionId.GetHashCode();
+        }
     }
 }

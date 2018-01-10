@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace WAD_Server
 {
-    public class Movie
+    public class Movie : IEquatable<Movie>
     {
         public String Title { get; set; }
         public String MovieType { get; set; }
         public double Price { get; set; }
         public String ImageFileName { get; set; }
-        public List<Movie> MovieList { get; set; }
 
         public void initMovie(String title, String movieType, double price, String imageFileName)
         {
@@ -22,6 +21,14 @@ namespace WAD_Server
             this.ImageFileName = imageFileName;
         }
 
-        public List<Movie> GetList() { return MovieList; }
+        public bool Equals(Movie other)
+        {
+            return Title.Equals(other.Title);
+        }
+
+        public override int GetHashCode()
+        {
+            return Title.GetHashCode();
+        }
     }
 }

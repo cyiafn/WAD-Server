@@ -34,6 +34,7 @@
             this.btnSaveBooking = new System.Windows.Forms.Button();
             this.txtDisplay = new System.Windows.Forms.TextBox();
             this.btnListBooking = new System.Windows.Forms.Button();
+            this.cbMovies = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // btnAddMovie
@@ -85,11 +86,21 @@
             this.btnListBooking.UseVisualStyleBackColor = true;
             this.btnListBooking.Click += new System.EventHandler(this.btnListBooking_Click);
             // 
+            // cbMovies
+            // 
+            this.cbMovies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbMovies.FormattingEnabled = true;
+            this.cbMovies.Location = new System.Drawing.Point(796, 391);
+            this.cbMovies.Name = "cbMovies";
+            this.cbMovies.Size = new System.Drawing.Size(262, 37);
+            this.cbMovies.TabIndex = 5;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 491);
+            this.Controls.Add(this.cbMovies);
             this.Controls.Add(this.btnListBooking);
             this.Controls.Add(this.txtDisplay);
             this.Controls.Add(this.btnSaveBooking);
@@ -110,6 +121,7 @@
         private System.Windows.Forms.Button btnSaveBooking;
         private System.Windows.Forms.TextBox txtDisplay;
         private System.Windows.Forms.Button btnListBooking;
+        private System.Windows.Forms.ComboBox cbMovies;
     }
 }
 

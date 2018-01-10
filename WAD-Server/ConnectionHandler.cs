@@ -121,13 +121,10 @@ namespace WAD_Server
             writer = new StreamWriter(ns);
             writer.AutoFlush = true;
 
-            Movie movieList = new Movie();
-            List<Movie> data = movieList.GetList();
-
             byte[] fileNameByte;
             byte[] fileData;
             
-            foreach (Movie item in data)
+            foreach (Movie item in variables.movieList)
             {
                 fileNameByte = Encoding.ASCII.GetBytes(item.ImageFileName);
                 fileData = File.ReadAllBytes(item.ImageFileName);
