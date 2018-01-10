@@ -301,7 +301,6 @@ namespace WAD_Server
 
         private void btnViewSpecificMovie_Click(object sender, EventArgs e)
         {
-            // do logic
             viewMovieBooking();
         }
     }
@@ -311,7 +310,7 @@ namespace WAD_Server
         //public static List<Booking> bookingList = new List<Booking>();
         //public static List<Movie> movieList = new List<Movie>();
         //public static List<user> userList = new List<user>();
-
+        
         public static HashSet<Booking> bookingList = new HashSet<Booking>();
         public static HashSet<Movie> movieList = new HashSet<Movie>();
         public static HashSet<user> userList = new HashSet<user>();

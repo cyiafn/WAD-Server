@@ -38,9 +38,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.cbDate = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnStatus = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnViewBookingList = new System.Windows.Forms.Button();
+            this.btnViewSeats = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.lblTime = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,6 +53,7 @@
             this.btn12PM.TabIndex = 1;
             this.btn12PM.Text = "12PM";
             this.btn12PM.UseVisualStyleBackColor = true;
+            this.btn12PM.Click += new System.EventHandler(this.btn12PM_Click);
             // 
             // btn2PM
             // 
@@ -61,6 +63,7 @@
             this.btn2PM.TabIndex = 3;
             this.btn2PM.Text = "2PM";
             this.btn2PM.UseVisualStyleBackColor = true;
+            this.btn2PM.Click += new System.EventHandler(this.btn2PM_Click);
             // 
             // btn4PM
             // 
@@ -70,6 +73,7 @@
             this.btn4PM.TabIndex = 4;
             this.btn4PM.Text = "4PM";
             this.btn4PM.UseVisualStyleBackColor = true;
+            this.btn4PM.Click += new System.EventHandler(this.btn4PM_Click);
             // 
             // btn6PM
             // 
@@ -79,6 +83,7 @@
             this.btn6PM.TabIndex = 5;
             this.btn6PM.Text = "6PM";
             this.btn6PM.UseVisualStyleBackColor = true;
+            this.btn6PM.Click += new System.EventHandler(this.btn6PM_Click);
             // 
             // btn8PM
             // 
@@ -88,6 +93,7 @@
             this.btn8PM.TabIndex = 6;
             this.btn8PM.Text = "8PM";
             this.btn8PM.UseVisualStyleBackColor = true;
+            this.btn8PM.Click += new System.EventHandler(this.btn8PM_Click);
             // 
             // btn10PM
             // 
@@ -97,6 +103,7 @@
             this.btn10PM.TabIndex = 7;
             this.btn10PM.Text = "10PM";
             this.btn10PM.UseVisualStyleBackColor = true;
+            this.btn10PM.Click += new System.EventHandler(this.btn10PM_Click);
             // 
             // btn12AM
             // 
@@ -106,6 +113,7 @@
             this.btn12AM.TabIndex = 8;
             this.btn12AM.Text = "12AM";
             this.btn12AM.UseVisualStyleBackColor = true;
+            this.btn12AM.Click += new System.EventHandler(this.btn12AM_Click);
             // 
             // label1
             // 
@@ -133,23 +141,24 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Date:";
             // 
-            // btnStatus
+            // btnViewBookingList
             // 
-            this.btnStatus.Location = new System.Drawing.Point(216, 451);
-            this.btnStatus.Name = "btnStatus";
-            this.btnStatus.Size = new System.Drawing.Size(190, 88);
-            this.btnStatus.TabIndex = 12;
-            this.btnStatus.Text = "View Booking List";
-            this.btnStatus.UseVisualStyleBackColor = true;
+            this.btnViewBookingList.Location = new System.Drawing.Point(216, 451);
+            this.btnViewBookingList.Name = "btnViewBookingList";
+            this.btnViewBookingList.Size = new System.Drawing.Size(190, 88);
+            this.btnViewBookingList.TabIndex = 12;
+            this.btnViewBookingList.Text = "View Booking List";
+            this.btnViewBookingList.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // btnViewSeats
             // 
-            this.button1.Location = new System.Drawing.Point(20, 451);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(190, 88);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "View Seats";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnViewSeats.Location = new System.Drawing.Point(20, 451);
+            this.btnViewSeats.Name = "btnViewSeats";
+            this.btnViewSeats.Size = new System.Drawing.Size(190, 88);
+            this.btnViewSeats.TabIndex = 13;
+            this.btnViewSeats.Text = "View Seats";
+            this.btnViewSeats.UseVisualStyleBackColor = true;
+            this.btnViewSeats.Click += new System.EventHandler(this.btnViewSeats_Click);
             // 
             // dataGridView1
             // 
@@ -160,14 +169,24 @@
             this.dataGridView1.Size = new System.Drawing.Size(1302, 349);
             this.dataGridView1.TabIndex = 14;
             // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Location = new System.Drawing.Point(448, 481);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(242, 29);
+            this.lblTime.TabIndex = 15;
+            this.lblTime.Text = "Selected Time: None";
+            // 
             // ViewMovieBookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1356, 551);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.btnStatus);
+            this.Controls.Add(this.btnViewSeats);
+            this.Controls.Add(this.btnViewBookingList);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cbDate);
             this.Controls.Add(this.label1);
@@ -197,8 +216,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cbDate;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnStatus;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnViewBookingList;
+        private System.Windows.Forms.Button btnViewSeats;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label lblTime;
     }
 }

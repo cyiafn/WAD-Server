@@ -140,27 +140,23 @@ namespace WAD_Server
                 string firstName = reader.ReadLine();
                 string middleName = reader.ReadLine();
                 string lastName = reader.ReadLine();
-                bool exists = false;
-                foreach (user details in variables.userList)
-                {
-                    if (details.getEmail() == email)
-                    {
-                        exists = true;
-                    }
-                }
-                if (exists == true)
+                string dob = reader.ReadLine();
+
+                user newUser = new user();
+                newUser.intializeUser(firstName, middleName, lastName, email, password, dob);
+
+                bool exist = variables.userList.Contains(newUser);
+                if (exist)
                 {
                     writer.WriteLine("fail");
+                    return;
                 }
-                else
-                {
-                    writer.WriteLine("success");
-                }
+                variables.userList.Add(newUser);
+                writer.WriteLine("success");
             }
             catch (Exception)
             {
-                f.SetText("Exception occured on login");
-                // some error when reading line (client disconnected etc)
+                f.SetText("Exception occured on register.");
             }
         }
 

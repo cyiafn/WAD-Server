@@ -75,6 +75,12 @@
     <Compile Include="ViewMovieBookingForm.Designer.cs">
       <DependentUpon>ViewMovieBookingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewSeatsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewSeatsForm.designer.cs">
+      <DependentUpon>ViewSeatsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AddMovieForm.resx">
       <DependentUpon>AddMovieForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewMovieBookingForm.resx">
       <DependentUpon>ViewMovieBookingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewSeatsForm.resx">
+      <DependentUpon>ViewSeatsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
