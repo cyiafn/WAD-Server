@@ -76,6 +76,7 @@
             this.txtDisplay.Multiline = true;
             this.txtDisplay.Name = "txtDisplay";
             this.txtDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.txtDisplay.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtDisplay.Size = new System.Drawing.Size(1046, 352);
             this.txtDisplay.TabIndex = 3;
             // 

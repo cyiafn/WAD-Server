@@ -21,7 +21,20 @@ namespace WAD_Server
 
         public void populateDataGrid()
         {
-            dgvBooking.DataSource = variables.bookingList.ToList();
+            dgvBooking.Columns.Add("ID", "ID");
+            dgvBooking.Columns.Add("Movie", "Movie");
+            dgvBooking.Columns.Add("User", "User");
+            dgvBooking.Columns.Add("Price", "Price");
+            dgvBooking.Columns.Add("Date", "Date");
+            dgvBooking.Columns.Add("Timeslot", "Timeslot");
+            dgvBooking.Columns.Add("Seat(s)", "Seat(s)");
+            //dgvBooking.DataSource = variables.bookingList.ToList();
+            foreach (Booking details in variables.bookingList)
+            {
+                string seats = string.Join(",", details.Seats);
+                dgvBooking.Rows.Add(new object[] { details.TransactionId, details.Movie, details.User,
+                    details.Price, details.Date, details.Timeslot, seats });
+            }
 
             // set autosize mode
             dgvBooking.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;

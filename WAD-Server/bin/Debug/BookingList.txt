@@ -1,0 +1,4 @@
+1;movietitle;alan;2.00;18/2/17;2PM;A1
+2;movietitle;alan;2.00;18/2/17;2PM;A1|A3|A4
+3;movietitle;alan;2.00;18/2/17;2PM;B1|B2|B3
+3;movietitle;alan;2.00;18/2/17;2PM;B1

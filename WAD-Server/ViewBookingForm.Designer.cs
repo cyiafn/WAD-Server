@@ -34,18 +34,19 @@
             // 
             // dgvBooking
             // 
+            this.dgvBooking.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvBooking.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBooking.Location = new System.Drawing.Point(12, 12);
             this.dgvBooking.Name = "dgvBooking";
             this.dgvBooking.RowTemplate.Height = 37;
-            this.dgvBooking.Size = new System.Drawing.Size(1022, 582);
+            this.dgvBooking.Size = new System.Drawing.Size(1404, 542);
             this.dgvBooking.TabIndex = 0;
             // 
             // ViewBookingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 606);
+            this.ClientSize = new System.Drawing.Size(1428, 566);
             this.Controls.Add(this.dgvBooking);
             this.Name = "ViewBookingForm";
             this.Text = "ViewBookingForm";

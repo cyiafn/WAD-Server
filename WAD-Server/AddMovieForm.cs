@@ -14,9 +14,12 @@ namespace WAD_Server
 {
     public partial class AddMovieForm : Form
     {
-        public AddMovieForm()
+        private Form1 f;
+
+        public AddMovieForm(Form1 f)
         {
             InitializeComponent();
+            this.f = f;
         }
 
         // To add movie with textbox and image from picturebox
@@ -67,6 +70,7 @@ namespace WAD_Server
             }
 
             variables.movieList.Add(newMovie);
+            f.SetText(title + " added to Movie List.");
             MessageBox.Show(title + " has been added.");
             this.Close();
         }

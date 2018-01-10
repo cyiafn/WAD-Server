@@ -20,8 +20,6 @@ namespace WAD_Server
         // Declare delegate
         public delegate void SetTextCallback(string msg);
 
-        private static bool updated = false;
-
         public Form1()
         {
             InitializeComponent();
@@ -42,7 +40,7 @@ namespace WAD_Server
             IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, port);
             server.Bind(endpoint);
             server.Listen(10);
-            //SetText("Waiting for clients on port " + port);
+            SetText("Waiting for clients on port " + port);
             await Task.Run(() =>
             {
                 while (true)
@@ -55,8 +53,8 @@ namespace WAD_Server
                     }
                     catch (Exception)
                     {
-                        MessageBox.Show("Connection failed on port " + port);
-                        //SetText("Connection falied on port " + port);
+                        //MessageBox.Show("Connection failed on port " + port);
+                        SetText("Connection falied on port " + port);
                     }
                 }
             });
@@ -73,7 +71,8 @@ namespace WAD_Server
                 this.Invoke(d, msg);
                 return;
             }
-            txtDisplay.Text = msg;
+            txtDisplay.AppendText(msg + "\n");
+            //txtDisplay.Text = msg;
         }
         #endregion
 
@@ -107,9 +106,11 @@ namespace WAD_Server
                     {
                         Booking newbook = new Booking();
                         string[] temp = Convert.ToString(line).Split(';');
-                        newbook.initBooking(temp[0], temp[1], Convert.ToDouble(temp[2]), temp[3]);
+                        string[] seats = temp[6].Split('|');
+                        newbook.initBooking(temp[0], temp[1], temp[2], Convert.ToDouble(temp[3]), temp[4], temp[5], seats);
                         variables.bookingList.Add(newbook);
                     }
+                    SetText("Booking details has been loaded.");
                     MessageBox.Show("Booking details has been loaded.");
                 }
                 catch (Exception ex)
@@ -138,10 +139,12 @@ namespace WAD_Server
 
                 foreach (Booking book in variables.bookingList)
                 {
-                    writer.WriteLine("{0};{1};{2};{3}", book.TransactionId, book.Seat, book.Price, book.DateTime);
+                    writer.WriteLine("{0};{1};{2};{3};{4};{5}", 
+                        book.TransactionId, book.Movie, book.Price, book.Date, book.Timeslot, string.Join("|", book.Seats));
                 }
                 writer.Dispose();
                 writer.Close();
+                SetText("Booking details has been saved.");
                 MessageBox.Show("Booking list saved!");
             }
         }
@@ -153,12 +156,12 @@ namespace WAD_Server
         {
             string s = null;
 
-            foreach (Booking book in variables.bookingList)
-            {
-                // do logic
-                s += "ID\tSeat\tPrice\tDateTime" + Environment.NewLine;
-                s += string.Format("{0}\t{1}\t{2}\t{3}", book.TransactionId, book.Seat, book.Price, book.DateTime) + Environment.NewLine;
-            }
+            //foreach (Booking book in variables.bookingList)
+            //{
+            //    // do logic
+            //    s += "ID\tSeat\tPrice\tDateTime" + Environment.NewLine;
+            //    s += string.Format("{0}\t{1}\t{2}\t{3}", book.TransactionId, book.Seat, book.Price, book.DateTime) + Environment.NewLine;
+            //}
             // to temporary display
             SetText(s);
             //MessageBox.Show(s);
@@ -239,6 +242,7 @@ namespace WAD_Server
                         MessageBox.Show(movie + " status has been changed to now showing.");
                     else
                        MessageBox.Show(movie + " status has been changed to not showing.");
+                    SetText(movie + " status has been updated.");
                     return;
                 }
             }
@@ -270,7 +274,7 @@ namespace WAD_Server
 
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
-            AddMovieForm form2 = new AddMovieForm();
+            AddMovieForm form2 = new AddMovieForm(this);
             form2.Show();
         }
 
