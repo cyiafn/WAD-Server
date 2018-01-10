@@ -20,3 +20,16 @@ C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assi
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.Form1.resources
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.ViewBookingForm.resources
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.ViewMovieBookingForm.resources
+D:\Visual Studio Projects\WAD-Server\WAD-Server\bin\Debug\WAD-Server.exe.config
+D:\Visual Studio Projects\WAD-Server\WAD-Server\bin\Debug\WAD-Server.exe
+D:\Visual Studio Projects\WAD-Server\WAD-Server\bin\Debug\WAD-Server.pdb
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD-Server.csprojResolveAssemblyReference.cache
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD_Server.AddMovieForm.resources
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD_Server.Form1.resources
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD_Server.Properties.Resources.resources
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD_Server.ViewBookingForm.resources
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD_Server.ViewMovieBookingForm.resources
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD-Server.csproj.GenerateResource.Cache
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD-Server.csproj.CoreCompileInputs.cache
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD-Server.exe
+D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD-Server.pdb

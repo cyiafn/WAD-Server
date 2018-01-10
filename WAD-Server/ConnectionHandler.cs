@@ -65,7 +65,10 @@ namespace WAD_Server
                     {
                         SearchMovie();
                     }
-
+                    else if (input.ToLower() == "register")
+                    {
+                        Register();
+                    }
                     else if (input.ToLower() == "terminate")
                         break;
                     //f.SetText("Client >> " + input);
@@ -115,6 +118,47 @@ namespace WAD_Server
                     writer.WriteLine("unauthorized");
                     writer.Flush();
                 }
+                writer.Close();
+                reader.Close();
+            }
+            catch (Exception)
+            {
+                f.SetText("Exception occured on login");
+                // some error when reading line (client disconnected etc)
+            }
+        }
+
+        //basic register
+        public void Register()
+        {
+            ns = new NetworkStream(client);
+            writer = new StreamWriter(ns);
+            writer.AutoFlush = true;
+
+            try
+            {
+                string email = reader.ReadLine();
+                string password = reader.ReadLine();
+                string firstName = reader.ReadLine();
+                string middleName = reader.ReadLine();
+                string lastName = reader.ReadLine();
+                bool exists = false;
+                foreach (user details in variables.userList)
+                {
+                    if (details.getEmail() == email)
+                    {
+                        exists = true;
+                    }
+                }
+                if (exists == true)
+                {
+                    writer.WriteLine("fail");
+                }
+                else
+                {
+                    writer.WriteLine("success");
+                }
+                writer.Flush();
                 writer.Close();
                 reader.Close();
             }
