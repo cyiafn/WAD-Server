@@ -122,14 +122,17 @@ namespace WAD_Server
             
             foreach (Movie item in variables.movieList)
             {
-                fileNameByte = Encoding.ASCII.GetBytes(item.ImageFileName);
-                fileData = File.ReadAllBytes(item.ImageFileName);
+                if (item.Status == true)
+                {
+                    fileNameByte = Encoding.ASCII.GetBytes(item.ImageFileName);
+                    fileData = File.ReadAllBytes(item.ImageFileName);
 
-                // sends the title, filename, file data bytes and file data
-                writer.WriteLine(item.Title);
-                writer.WriteLine(item.ImageFileName);
-                writer.WriteLine(fileData.Length);
-                client.Send(fileData);
+                    // sends the title, filename, file data bytes and file data
+                    writer.WriteLine(item.Title);
+                    writer.WriteLine(item.ImageFileName);
+                    writer.WriteLine(fileData.Length);
+                    client.Send(fileData);
+                }
             }
             writer.WriteLine("sent");
             writer.Close();

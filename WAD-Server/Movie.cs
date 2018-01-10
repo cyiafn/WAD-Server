@@ -12,6 +12,7 @@ namespace WAD_Server
         public String MovieType { get; set; }
         public double Price { get; set; }
         public String ImageFileName { get; set; }
+        public bool Status { get; set; }
 
         public void initMovie(String title, String movieType, double price, String imageFileName)
         {
@@ -19,6 +20,7 @@ namespace WAD_Server
             this.MovieType = movieType;
             this.Price = price;
             this.ImageFileName = imageFileName;
+            this.Status = true;
         }
 
         public bool Equals(Movie other)

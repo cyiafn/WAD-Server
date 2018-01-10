@@ -185,15 +185,6 @@ namespace WAD_Server
                                 count++;
                             }
                         }
-                        else if (updated)
-                        {
-                            // check status of movie accordingly
-
-                            // or look for other conditions to update if list is updated
-                            // remove items in cbox, re-add in cbox
-                            updated = false;
-                            cbMovies.Refresh();
-                        }
                         else if (count != variables.movieList.Count)
                         {
                             foreach (Movie details in variables.movieList)
@@ -201,6 +192,7 @@ namespace WAD_Server
                                 // check status of movie and remove accordingly
                                 if (!cbMovies.Items.Contains(details.Title))
                                 {
+                                    // Prevent cross thread from happening here
                                     addTitle(details.Title);
                                     count++;
                                 }
@@ -227,14 +219,14 @@ namespace WAD_Server
         #endregion
 
         // To remove movie based on cbox (or change the status to not showing)
-        #region removeMovie() function
-        public void removeMovie()
+        #region changeStatus() function
+        public void changeStatus()
         {
             string movie = cbMovies.Text;
 
             if (movie == "")
             {
-                MessageBox.Show("Movie not selected.");
+                MessageBox.Show("Please select movie from drop down list to change status.");
                 return;
             }
             // to be modified to not remove but update status
@@ -242,16 +234,39 @@ namespace WAD_Server
             {
                 if (details.Title == movie)
                 {
-                    variables.movieList.Remove(details);
-                    updated = true;
-                    break;
+                    details.Status = !details.Status;
+                    if (details.Status)
+                        MessageBox.Show(movie + " status has been changed to now showing.");
+                    else
+                       MessageBox.Show(movie + " status has been changed to not showing.");
+                    return;
                 }
             }
         }
         #endregion
 
         // To list all booking of specific movie
-        // code here , probably run this function on cbBox index changed event
+        #region viewMovieBooking() function
+        public void viewMovieBooking()
+        {
+            string movie = cbMovies.Text;
+
+            if (movie == "")
+            {
+                MessageBox.Show("Please select view movie from drop down list Movie List.");
+                return;
+            }
+
+            variables.selectedMovie = movie;
+            ViewMovieBookingForm form2 = new ViewMovieBookingForm();
+            form2.Show();
+            // open new form or smth
+            // set a global variable static string for movie
+            // form will show movie timeslots combobox or something
+            // show date or smth
+            // display on gridview
+        }
+        #endregion
 
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
@@ -271,14 +286,19 @@ namespace WAD_Server
 
         private void btnListBooking_Click(object sender, EventArgs e)
         {
-            //listBooking();
             ViewBookingForm form2 = new ViewBookingForm();
             form2.Show();
         }
 
-        private void btnRemove_Click(object sender, EventArgs e)
+        private void btnStatus_Click(object sender, EventArgs e)
         {
+            changeStatus();
+        }
 
+        private void btnViewSpecificMovie_Click(object sender, EventArgs e)
+        {
+            // do logic
+            viewMovieBooking();
         }
     }
 
@@ -291,5 +311,6 @@ namespace WAD_Server
         public static HashSet<Booking> bookingList = new HashSet<Booking>();
         public static HashSet<Movie> movieList = new HashSet<Movie>();
         public static HashSet<user> userList = new HashSet<user>();
+        public static string selectedMovie = null;
     }
 }

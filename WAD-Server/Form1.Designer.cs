@@ -35,7 +35,9 @@
             this.txtDisplay = new System.Windows.Forms.TextBox();
             this.btnListBooking = new System.Windows.Forms.Button();
             this.cbMovies = new System.Windows.Forms.ComboBox();
-            this.btnRemove = new System.Windows.Forms.Button();
+            this.btnStatus = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnViewSpecificMovie = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddMovie
@@ -91,27 +93,48 @@
             // 
             this.cbMovies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMovies.FormattingEnabled = true;
-            this.cbMovies.Location = new System.Drawing.Point(12, 494);
+            this.cbMovies.Location = new System.Drawing.Point(12, 526);
             this.cbMovies.Name = "cbMovies";
-            this.cbMovies.Size = new System.Drawing.Size(386, 37);
+            this.cbMovies.Size = new System.Drawing.Size(376, 37);
             this.cbMovies.TabIndex = 5;
             // 
-            // btnRemove
+            // btnStatus
             // 
-            this.btnRemove.Location = new System.Drawing.Point(600, 494);
-            this.btnRemove.Name = "btnRemove";
-            this.btnRemove.Size = new System.Drawing.Size(190, 50);
-            this.btnRemove.TabIndex = 6;
-            this.btnRemove.Text = "Remove Movie";
-            this.btnRemove.UseVisualStyleBackColor = true;
-            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
+            this.btnStatus.Location = new System.Drawing.Point(404, 494);
+            this.btnStatus.Name = "btnStatus";
+            this.btnStatus.Size = new System.Drawing.Size(190, 88);
+            this.btnStatus.TabIndex = 6;
+            this.btnStatus.Text = "Change Status";
+            this.btnStatus.UseVisualStyleBackColor = true;
+            this.btnStatus.Click += new System.EventHandler(this.btnStatus_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(7, 494);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(127, 29);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Movie List:";
+            // 
+            // btnViewSpecificMovie
+            // 
+            this.btnViewSpecificMovie.Location = new System.Drawing.Point(600, 494);
+            this.btnViewSpecificMovie.Name = "btnViewSpecificMovie";
+            this.btnViewSpecificMovie.Size = new System.Drawing.Size(190, 88);
+            this.btnViewSpecificMovie.TabIndex = 8;
+            this.btnViewSpecificMovie.Text = "View Movie Booking";
+            this.btnViewSpecificMovie.UseVisualStyleBackColor = true;
+            this.btnViewSpecificMovie.Click += new System.EventHandler(this.btnViewSpecificMovie_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 564);
-            this.Controls.Add(this.btnRemove);
+            this.ClientSize = new System.Drawing.Size(1070, 626);
+            this.Controls.Add(this.btnViewSpecificMovie);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnStatus);
             this.Controls.Add(this.cbMovies);
             this.Controls.Add(this.btnListBooking);
             this.Controls.Add(this.txtDisplay);
@@ -134,7 +157,9 @@
         private System.Windows.Forms.TextBox txtDisplay;
         private System.Windows.Forms.Button btnListBooking;
         private System.Windows.Forms.ComboBox cbMovies;
-        private System.Windows.Forms.Button btnRemove;
+        private System.Windows.Forms.Button btnStatus;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnViewSpecificMovie;
     }
 }
 

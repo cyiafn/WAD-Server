@@ -19,3 +19,4 @@ C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assi
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.AddMovieForm.resources
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.Form1.resources
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.ViewBookingForm.resources
+C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\GitHub Repo\WAD-Server\obj\Debug\WAD_Server.ViewMovieBookingForm.resources
