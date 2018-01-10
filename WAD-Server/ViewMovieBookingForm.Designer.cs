@@ -40,9 +40,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnViewBookingList = new System.Windows.Forms.Button();
             this.btnViewSeats = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvBookingList = new System.Windows.Forms.DataGridView();
             this.lblTime = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBookingList)).BeginInit();
             this.SuspendLayout();
             // 
             // btn12PM
@@ -126,6 +126,7 @@
             // 
             // cbDate
             // 
+            this.cbDate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDate.FormattingEnabled = true;
             this.cbDate.Location = new System.Drawing.Point(113, 17);
             this.cbDate.Name = "cbDate";
@@ -149,6 +150,7 @@
             this.btnViewBookingList.TabIndex = 12;
             this.btnViewBookingList.Text = "View Booking List";
             this.btnViewBookingList.UseVisualStyleBackColor = true;
+            this.btnViewBookingList.Click += new System.EventHandler(this.btnViewBookingList_Click);
             // 
             // btnViewSeats
             // 
@@ -160,14 +162,14 @@
             this.btnViewSeats.UseVisualStyleBackColor = true;
             this.btnViewSeats.Click += new System.EventHandler(this.btnViewSeats_Click);
             // 
-            // dataGridView1
+            // dgvBookingList
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(26, 80);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 37;
-            this.dataGridView1.Size = new System.Drawing.Size(1302, 349);
-            this.dataGridView1.TabIndex = 14;
+            this.dgvBookingList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBookingList.Location = new System.Drawing.Point(26, 80);
+            this.dgvBookingList.Name = "dgvBookingList";
+            this.dgvBookingList.RowTemplate.Height = 37;
+            this.dgvBookingList.Size = new System.Drawing.Size(1302, 349);
+            this.dgvBookingList.TabIndex = 14;
             // 
             // lblTime
             // 
@@ -184,7 +186,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1356, 551);
             this.Controls.Add(this.lblTime);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dgvBookingList);
             this.Controls.Add(this.btnViewSeats);
             this.Controls.Add(this.btnViewBookingList);
             this.Controls.Add(this.label2);
@@ -199,7 +201,7 @@
             this.Controls.Add(this.btn12PM);
             this.Name = "ViewMovieBookingForm";
             this.Text = "ViewMovieBookingForm";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBookingList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,7 +220,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnViewBookingList;
         private System.Windows.Forms.Button btnViewSeats;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvBookingList;
         private System.Windows.Forms.Label lblTime;
     }
 }

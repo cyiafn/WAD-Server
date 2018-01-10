@@ -46,7 +46,7 @@ namespace WAD_Server
 
                 foreach (Booking details in variables.bookingList)
                 {
-                    if (details.Movie == movieGiven)
+                    if ((details.Movie == movieGiven) && (details.Date == dateGiven) && (details.Timeslot == timeslotGiven))
                     {
                         string[] seats = details.Seats;
                         foreach (var seat in seats)
