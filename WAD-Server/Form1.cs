@@ -16,12 +16,11 @@ namespace WAD_Server
 {
     public partial class Form1 : Form
     {
-        Booking booking = new Booking();
-        Movie movie = new Movie();
-
         Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         // Declare delegate
         public delegate void SetTextCallback(string msg);
+
+        private static bool updated = false;
 
         public Form1()
         {
@@ -103,19 +102,15 @@ namespace WAD_Server
             {
                 try
                 {
-                    int count = 0;
                     string[] data = File.ReadAllLines(dlg.FileName);
                     foreach (var line in data)
                     {
+                        Booking newbook = new Booking();
                         string[] temp = Convert.ToString(line).Split(';');
-                        //Booking newBooking = new Booking();
-                        //newBooking.initBooking(temp[0], temp[1], Convert.ToDouble(temp[2]), temp[3]);
-
-                        booking.initBooking(temp[0], temp[1], Convert.ToDouble(temp[2]), temp[3]);
-                        variables.bookingList.Add(booking);
-                        count++;
+                        newbook.initBooking(temp[0], temp[1], Convert.ToDouble(temp[2]), temp[3]);
+                        variables.bookingList.Add(newbook);
                     }
-                    MessageBox.Show(count + " booking details has been loaded.");
+                    MessageBox.Show("Booking details has been loaded.");
                 }
                 catch (Exception ex)
                 {
@@ -152,7 +147,7 @@ namespace WAD_Server
         }
         #endregion
 
-        // To list all booking of movie
+        // To list all booking of movie (not needed anymore)
         #region listBooking() function
         public void listBooking()
         {
@@ -170,8 +165,8 @@ namespace WAD_Server
         }
         #endregion
 
-        // To populate combobox (updates every 60 seconds)
-        #region populateCBox()
+        // To populate combobox (updates every 30 seconds)
+        #region populateCBox() function
         async void populateCBox()
         {
             await Task.Run(async () =>
@@ -190,10 +185,20 @@ namespace WAD_Server
                                 count++;
                             }
                         }
+                        else if (updated)
+                        {
+                            // check status of movie accordingly
+
+                            // or look for other conditions to update if list is updated
+                            // remove items in cbox, re-add in cbox
+                            updated = false;
+                            cbMovies.Refresh();
+                        }
                         else if (count != variables.movieList.Count)
                         {
                             foreach (Movie details in variables.movieList)
                             {
+                                // check status of movie and remove accordingly
                                 if (!cbMovies.Items.Contains(details.Title))
                                 {
                                     addTitle(details.Title);
@@ -217,7 +222,31 @@ namespace WAD_Server
         #region PutTaskDelay()
         async Task PutTaskDelay()
         {
-            await Task.Delay(60000);
+            await Task.Delay(30000);
+        }
+        #endregion
+
+        // To remove movie based on cbox (or change the status to not showing)
+        #region removeMovie() function
+        public void removeMovie()
+        {
+            string movie = cbMovies.Text;
+
+            if (movie == "")
+            {
+                MessageBox.Show("Movie not selected.");
+                return;
+            }
+            // to be modified to not remove but update status
+            foreach (Movie details in variables.movieList)
+            {
+                if (details.Title == movie)
+                {
+                    variables.movieList.Remove(details);
+                    updated = true;
+                    break;
+                }
+            }
         }
         #endregion
 
@@ -242,7 +271,14 @@ namespace WAD_Server
 
         private void btnListBooking_Click(object sender, EventArgs e)
         {
-            listBooking();
+            //listBooking();
+            ViewBookingForm form2 = new ViewBookingForm();
+            form2.Show();
+        }
+
+        private void btnRemove_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

@@ -35,6 +35,7 @@
             this.txtDisplay = new System.Windows.Forms.TextBox();
             this.btnListBooking = new System.Windows.Forms.Button();
             this.cbMovies = new System.Windows.Forms.ComboBox();
+            this.btnRemove = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddMovie
@@ -90,16 +91,27 @@
             // 
             this.cbMovies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbMovies.FormattingEnabled = true;
-            this.cbMovies.Location = new System.Drawing.Point(796, 391);
+            this.cbMovies.Location = new System.Drawing.Point(12, 494);
             this.cbMovies.Name = "cbMovies";
-            this.cbMovies.Size = new System.Drawing.Size(262, 37);
+            this.cbMovies.Size = new System.Drawing.Size(386, 37);
             this.cbMovies.TabIndex = 5;
+            // 
+            // btnRemove
+            // 
+            this.btnRemove.Location = new System.Drawing.Point(600, 494);
+            this.btnRemove.Name = "btnRemove";
+            this.btnRemove.Size = new System.Drawing.Size(190, 50);
+            this.btnRemove.TabIndex = 6;
+            this.btnRemove.Text = "Remove Movie";
+            this.btnRemove.UseVisualStyleBackColor = true;
+            this.btnRemove.Click += new System.EventHandler(this.btnRemove_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1070, 491);
+            this.ClientSize = new System.Drawing.Size(1070, 564);
+            this.Controls.Add(this.btnRemove);
             this.Controls.Add(this.cbMovies);
             this.Controls.Add(this.btnListBooking);
             this.Controls.Add(this.txtDisplay);
@@ -122,6 +134,7 @@
         private System.Windows.Forms.TextBox txtDisplay;
         private System.Windows.Forms.Button btnListBooking;
         private System.Windows.Forms.ComboBox cbMovies;
+        private System.Windows.Forms.Button btnRemove;
     }
 }
 

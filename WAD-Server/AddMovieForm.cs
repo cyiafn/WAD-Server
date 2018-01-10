@@ -40,17 +40,32 @@ namespace WAD_Server
                 MessageBox.Show("Please fill in all the fields!");
                 return;
             }
-
-            // Code to save image as JPG
-            int width = Convert.ToInt32(pbPreview.Width);
-            int height = Convert.ToInt32(pbPreview.Height);
-            Bitmap bmp = new Bitmap(width, height);
-            pbPreview.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
-            bmp.Save(imageFileName, ImageFormat.Jpeg);
+            try
+            {
+                // Code to save image as JPG
+                int width = Convert.ToInt32(pbPreview.Width);
+                int height = Convert.ToInt32(pbPreview.Height);
+                Bitmap bmp = new Bitmap(width, height);
+                pbPreview.DrawToBitmap(bmp, new Rectangle(0, 0, width, height));
+                bmp.Save(imageFileName, ImageFormat.Jpeg);
+            }
+            catch (System.Runtime.InteropServices.ExternalException)
+            {
+                MessageBox.Show("Please ensure that image uploaded is not in current folder.\nAlternatively, rename the image file.");
+                return;
+            }
 
             // Add new movie to MovieList list
             Movie newMovie = new Movie();
             newMovie.initMovie(title, movieType, price, imageFileName);
+
+            bool exist = variables.movieList.Contains(newMovie);
+            if (exist)
+            {
+                MessageBox.Show("Movie is already added");
+                return;
+            }
+
             variables.movieList.Add(newMovie);
             MessageBox.Show(title + " has been added.");
             this.Close();

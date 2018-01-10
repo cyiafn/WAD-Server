@@ -12,7 +12,6 @@ namespace WAD_Server
         public String Seat { get; set; }
         public double Price { get; set; }
         public String DateTime { get; set; }
-        //public List<Booking> bookingList = new List<Booking>();
 
         public void initBooking(String transactionId, string seat, double price, String dateTime)
         {
