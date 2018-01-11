@@ -70,9 +70,12 @@ namespace WAD_Server
                     {
                         Register();
                     }
+                    else if (input.ToLower() == "remove_booking")
+                    {
+                        removeBooking();
+                    }
                     else if (input.ToLower() == "terminate")
                         break;
-                    //f.SetText("Client >> " + input);
                 }
                 ns.Close();
                 client.Close();
@@ -205,7 +208,6 @@ namespace WAD_Server
                 //        client.Send(fileData);
                 //    }
                 //}
-                writer.WriteLine("sent");
             }
             catch (Exception)
             {
@@ -222,7 +224,6 @@ namespace WAD_Server
             writer.AutoFlush = true;
             try
             {
-                // id need to be unique? how? ***
                 string id = reader.ReadLine();
                 string movie = reader.ReadLine();
                 string user = reader.ReadLine();
@@ -230,6 +231,52 @@ namespace WAD_Server
                 string date = reader.ReadLine();
                 string time = reader.ReadLine();
                 string[] seats = (reader.ReadLine()).Split('|');
+
+                int count = 0;
+
+                foreach (Movie m in variables.movieList)
+                {
+                    if (m.Title == movie)
+                    {
+                        string[] bookedSeats = m.ShowTime[date + time];
+
+                        if (bookedSeats == null || bookedSeats.Length == 0)
+                        {
+                            writer.WriteLine("fail");
+                            writer.WriteLine("All seats are being reserved!");
+                            return;
+                        }
+
+                        List<string> list = new List<string>(bookedSeats);
+                        foreach (string s in seats)
+                        {
+                            if (list.Contains(s))
+                            {
+                                count++;
+                            }
+                        }
+                        // Check to see if no. of reserve seats matches no. avail seats
+                        if (count == seats.Length)
+                        {
+                            foreach (string s in seats)
+                            {
+                                if (list.Contains(s))
+                                {
+                                    list.Remove(s);
+                                }
+                            }
+                            // converts back to string[] and update ShowTime
+                            m.ShowTime[date + time] = list.ToArray();
+                        }
+                        else
+                        {
+                            writer.WriteLine("fail");
+                            writer.WriteLine("Seats selected are already reserved!");
+                            return;
+                        }
+                        break;
+                    }
+                }
 
                 Booking newBook = new Booking();
                 newBook.initBooking(id, movie, user, price, date, time, seats);
@@ -243,13 +290,6 @@ namespace WAD_Server
             {
                 f.SetText("Exception occured when adding client booking.");
             }
-
-            //bool exist = variables.bookingList.Contains(newBook);
-            //if (exist)
-            //{
-            //    writer.WriteLine("exist");
-            //    return;
-            //}
         }
 
         // To return list of booking that client has booked
@@ -290,7 +330,10 @@ namespace WAD_Server
                         writer.WriteLine(xml);
                     }
                 }
-                writer.WriteLine("sent");
+                else
+                {
+                    writer.WriteLine("fail");
+                }
             }
             catch (Exception)
             {
@@ -346,11 +389,60 @@ namespace WAD_Server
                         writer.WriteLine(xml);
                     }
                 }
-                writer.WriteLine("sent");
+                else
+                {
+                    writer.WriteLine("fail");
+                }
+                //writer.WriteLine("sent");
             }
             catch (Exception)
             {
                 f.SetText("Exception occured when searching movie.");
+            }
+        }
+
+        // To remove client's booking
+        public void removeBooking()
+        {
+            ns = new NetworkStream(client);
+            reader = new StreamReader(ns);
+            writer = new StreamWriter(ns);
+            writer.AutoFlush = true;
+
+            try
+            {
+                string id = reader.ReadLine();
+                string movie = reader.ReadLine();
+                string user = reader.ReadLine();
+                double price = Convert.ToDouble(reader.ReadLine());
+                string date = reader.ReadLine();
+                string time = reader.ReadLine();
+                string[] seats = (reader.ReadLine()).Split('|');
+
+                foreach (Movie m in variables.movieList)
+                {
+                    if (m.Title == movie)
+                    {
+                        string[] bookedSeats = m.ShowTime[date + time];
+                        List<string> list = new List<string>(bookedSeats);
+                        foreach (string s in seats)
+                        {
+                            list.Add(s);
+                        }
+                        m.ShowTime[date + time] = list.ToArray();
+                        break;
+                    }
+                }
+
+                Booking newBook = new Booking();
+                newBook.initBooking(id, movie, user, price, date, time, seats);
+                variables.bookingList.Remove(newBook);
+
+                f.SetText("Client's booking has been removed from Booking List.");
+            }
+            catch
+            {
+                f.SetText("Exception occured when removing client's booking.");
             }
         }
     }
