@@ -7,6 +7,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,6 +32,7 @@ namespace WAD_Server
             double price = 0;
             double.TryParse(txtPrice.Text.Trim(), out price);
             string imageFileName = txtImage.Text.Trim();
+            string videoUrl = VideoId(txtUrl.Text.Trim());
             byte[] fileNameByte;
             byte[] fileData;
 
@@ -40,7 +42,7 @@ namespace WAD_Server
                 MessageBox.Show("Please upload image!");
                 return;
             }
-            else if (title == "" || movieType == "" || price <= 0 || imageFileName == "")
+            else if (title == "" || movieType == "" || price <= 0 || imageFileName == "" || videoUrl == string.Empty)
             {
                 MessageBox.Show("Please fill in all the fields!");
                 return;
@@ -65,7 +67,7 @@ namespace WAD_Server
 
             // Add new movie to MovieList list
             Movie newMovie = new Movie();
-            newMovie.initMovie(title, movieType, price, imageFileName, fileNameByte, fileData);
+            newMovie.initMovie(title, movieType, price, imageFileName, fileNameByte, fileData, videoUrl);
 
             bool exist = variables.movieList.Contains(newMovie);
             if (exist)
@@ -102,6 +104,17 @@ namespace WAD_Server
                     MessageBox.Show("Error: could not read image from disk.");
                 }
             }
+        }
+        #endregion
+
+        // Gets video ID from URL link, check if youtube link is valid with regex
+        #region VideoId() function
+        public string VideoId(string _ytUrl)
+        {
+            // Checks if Youtube URL given is valid using Regex
+            // Allows clients to open web browser control with youtube trailers
+            var ytMatch = new Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)").Match(_ytUrl);
+            return ytMatch.Success ? ytMatch.Groups[1].Value : string.Empty;
         }
         #endregion
 

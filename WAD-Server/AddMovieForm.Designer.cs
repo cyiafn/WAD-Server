@@ -40,6 +40,8 @@
             this.btnConfirm = new System.Windows.Forms.Button();
             this.pbPreview = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtUrl = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,9 +132,9 @@
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(1233, 482);
+            this.btnConfirm.Location = new System.Drawing.Point(1250, 482);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(174, 55);
+            this.btnConfirm.Size = new System.Drawing.Size(157, 55);
             this.btnConfirm.TabIndex = 9;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -157,11 +159,29 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Image Preview";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 492);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(119, 29);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Video Url:";
+            // 
+            // txtUrl
+            // 
+            this.txtUrl.Location = new System.Drawing.Point(139, 489);
+            this.txtUrl.Name = "txtUrl";
+            this.txtUrl.Size = new System.Drawing.Size(1073, 35);
+            this.txtUrl.TabIndex = 13;
+            // 
             // AddMovieForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1428, 566);
+            this.Controls.Add(this.txtUrl);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.pbPreview);
             this.Controls.Add(this.btnConfirm);
@@ -196,5 +216,7 @@
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.PictureBox pbPreview;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtUrl;
     }
 }

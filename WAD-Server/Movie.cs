@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -16,6 +17,7 @@ namespace WAD_Server
         public bool Status { get; set; }
         public byte[] FileNameByte { get; set; }
         public byte[] FileData { get; set; }
+        public string VideoId { get; set; }
         [XmlIgnore]
         public Dictionary<string, string[]> ShowTime { get; set; }
 
@@ -23,7 +25,7 @@ namespace WAD_Server
         string secondDay = (DateTime.Today.AddDays(1)).ToString("dd/MM/yyyy");
         string thirdDay = (DateTime.Today.AddDays(2)).ToString("dd/MM/yyyy");
 
-        public void initMovie(String title, String movieType, double price, String imageFileName, byte[] fileNameByte, byte[] fileData)
+        public void initMovie(String title, String movieType, double price, String imageFileName, byte[] fileNameByte, byte[] fileData, string videoId)
         {
             this.Title = title;
             this.MovieType = movieType;
@@ -32,6 +34,7 @@ namespace WAD_Server
             this.Status = true;
             this.FileNameByte = fileNameByte;
             this.FileData = fileData;
+            this.VideoId = videoId;
 
             Dictionary<string, string[]> showTime = new Dictionary<string, string[]>();
             string[] seats = { "A1", "A2", "A3", "A4", "A5", "B1", "B2", "B3", "B4", "B5", "C1", "C2", "C3", "C4", "C5" };
