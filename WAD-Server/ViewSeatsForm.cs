@@ -24,7 +24,9 @@ namespace WAD_Server
             movieGiven = movie;
             timeslotGiven = time;
             dateGiven = date;
-            //updateSeats();
+
+            // Disable/Enable seats
+            updateSeats();
         }
 
         public void SetButton(Button b)
@@ -35,29 +37,37 @@ namespace WAD_Server
                 this.Invoke(d, b);
                 return;
             }
-            b.Enabled = false;
+            b.Enabled = true;
         }
 
-        public void updateSeats(string ID)
+        // Updates the seating chart to enable buttons if not reserved
+        #region updateSeats() function
+        public void updateSeats()
         {
             try
             {
                 Button b;
 
-                foreach (Booking details in variables.bookingList)
+                foreach (Movie m in variables.movieList)
                 {
-                    if ((details.Movie == movieGiven) && (details.Date == dateGiven) && (details.Timeslot == timeslotGiven))
+                    if (m.Title == movieGiven)
                     {
-                        string[] seats = details.Seats;
-                        foreach (var seat in seats)
+                        string[] seats = m.ShowTime[dateGiven + ";" +timeslotGiven];
+
+                        foreach(string seat in seats)
                         {
                             b = this.Controls.Find(seat, true).FirstOrDefault() as Button;
                             SetButton(b);
                         }
+                        break;
                     }
                 }
             }
-            catch { }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error occured, please try again.");
+            }
         }
+        #endregion
     }
 }

@@ -14,7 +14,6 @@ namespace WAD_Server
     {
         private string MovieSelected = null;
         private string TimeSelected = null;
-        private string DateSelected = null;
 
         public delegate void SetTextCallback(string msg);
 
@@ -29,6 +28,8 @@ namespace WAD_Server
             UpdateCBDate();
         }
 
+        // Sets the text
+        #region SetText() function
         public void SetText(string msg)
         {
             if (this.InvokeRequired)
@@ -39,7 +40,10 @@ namespace WAD_Server
             }
             lblTime.Text = "Time selected: " + msg;
         }
+        #endregion
 
+        // Adds dates to combo box
+        #region addDate() function
         public void addDate(string date)
         {
             if (this.InvokeRequired)
@@ -49,23 +53,34 @@ namespace WAD_Server
                 return;
             }
             cbDate.Items.Add(date);
+            cbDate.Sorted = true;
         }
+        #endregion
 
+        // Populates combo box with dates based on movie selected
+        #region UpdateCBDate() function
         public void UpdateCBDate()
         {
-            foreach (Booking details in variables.bookingList)
+            string d = null;
+            foreach (Movie m in variables.movieList)
             {
-                if (details.Movie == MovieSelected)
+                foreach (var date in m.ShowTime)
                 {
-                    if (!cbDate.Items.Contains(details.Date))
+                    // Gets the key which is date;time format
+                    string[] temp = date.Key.Split(';');
+                    d = temp[0];
+                    if (!cbDate.Items.Contains(d))
                     {
                         // Prevent cross thread from happening here
-                        addDate(details.Date);
+                        addDate(d);
                     }
                 }
             }
         }
+        #endregion
 
+        // Populates data grid view with booking list on specific movie, time and date
+        #region UpdateGVBookingList() function
         public void UpdateGVBookingList()
         {
             dgvBookingList.Rows.Clear();
@@ -82,7 +97,7 @@ namespace WAD_Server
             {
                 foreach (Booking details in variables.bookingList)
                 {
-                    if ((details.Timeslot == TimeSelected) && (details.Date == date))
+                    if ((details.Timeslot == TimeSelected) && (details.Date == date) && (details.Movie == MovieSelected))
                     {
                         string seats = string.Join(",", details.Seats);
                         dgvBookingList.Rows.Add(new object[] { details.TransactionId, details.Movie, details.User, details.Price, seats });
@@ -94,7 +109,10 @@ namespace WAD_Server
                 MessageBox.Show("Please select date and time to view booking list.");
             }
         }
+        #endregion
 
+        // Button click events for all buttons in the form
+        #region Button_Click events
         private void btnViewSeats_Click(object sender, EventArgs e)
         {
             string date = cbDate.Text;
@@ -156,5 +174,6 @@ namespace WAD_Server
         {
             UpdateGVBookingList();
         }
+        #endregion
     }
 }

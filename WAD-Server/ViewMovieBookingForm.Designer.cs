@@ -164,6 +164,7 @@
             // 
             // dgvBookingList
             // 
+            this.dgvBookingList.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
             this.dgvBookingList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvBookingList.Location = new System.Drawing.Point(26, 80);
             this.dgvBookingList.Name = "dgvBookingList";

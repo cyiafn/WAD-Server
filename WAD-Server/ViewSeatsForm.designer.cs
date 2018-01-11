@@ -55,6 +55,7 @@
             // 
             // A1
             // 
+            this.A1.Enabled = false;
             this.A1.Location = new System.Drawing.Point(265, 315);
             this.A1.Name = "A1";
             this.A1.Size = new System.Drawing.Size(100, 100);
@@ -73,6 +74,7 @@
             // 
             // A2
             // 
+            this.A2.Enabled = false;
             this.A2.Location = new System.Drawing.Point(401, 315);
             this.A2.Name = "A2";
             this.A2.Size = new System.Drawing.Size(100, 100);
@@ -82,6 +84,7 @@
             // 
             // A3
             // 
+            this.A3.Enabled = false;
             this.A3.Location = new System.Drawing.Point(540, 315);
             this.A3.Name = "A3";
             this.A3.Size = new System.Drawing.Size(100, 100);
@@ -91,6 +94,7 @@
             // 
             // A4
             // 
+            this.A4.Enabled = false;
             this.A4.Location = new System.Drawing.Point(676, 315);
             this.A4.Name = "A4";
             this.A4.Size = new System.Drawing.Size(100, 100);
@@ -100,6 +104,7 @@
             // 
             // A5
             // 
+            this.A5.Enabled = false;
             this.A5.Location = new System.Drawing.Point(814, 315);
             this.A5.Name = "A5";
             this.A5.Size = new System.Drawing.Size(100, 100);
@@ -109,6 +114,7 @@
             // 
             // B5
             // 
+            this.B5.Enabled = false;
             this.B5.Location = new System.Drawing.Point(814, 190);
             this.B5.Name = "B5";
             this.B5.Size = new System.Drawing.Size(100, 100);
@@ -118,6 +124,7 @@
             // 
             // B4
             // 
+            this.B4.Enabled = false;
             this.B4.Location = new System.Drawing.Point(676, 190);
             this.B4.Name = "B4";
             this.B4.Size = new System.Drawing.Size(100, 100);
@@ -127,6 +134,7 @@
             // 
             // B3
             // 
+            this.B3.Enabled = false;
             this.B3.Location = new System.Drawing.Point(540, 190);
             this.B3.Name = "B3";
             this.B3.Size = new System.Drawing.Size(100, 100);
@@ -136,6 +144,7 @@
             // 
             // B2
             // 
+            this.B2.Enabled = false;
             this.B2.Location = new System.Drawing.Point(401, 190);
             this.B2.Name = "B2";
             this.B2.Size = new System.Drawing.Size(100, 100);
@@ -145,6 +154,7 @@
             // 
             // B1
             // 
+            this.B1.Enabled = false;
             this.B1.Location = new System.Drawing.Point(265, 190);
             this.B1.Name = "B1";
             this.B1.Size = new System.Drawing.Size(100, 100);
@@ -154,6 +164,7 @@
             // 
             // C5
             // 
+            this.C5.Enabled = false;
             this.C5.Location = new System.Drawing.Point(814, 64);
             this.C5.Name = "C5";
             this.C5.Size = new System.Drawing.Size(100, 100);
@@ -163,6 +174,7 @@
             // 
             // C4
             // 
+            this.C4.Enabled = false;
             this.C4.Location = new System.Drawing.Point(676, 64);
             this.C4.Name = "C4";
             this.C4.Size = new System.Drawing.Size(100, 100);
@@ -172,6 +184,7 @@
             // 
             // C3
             // 
+            this.C3.Enabled = false;
             this.C3.Location = new System.Drawing.Point(540, 64);
             this.C3.Name = "C3";
             this.C3.Size = new System.Drawing.Size(100, 100);
@@ -181,6 +194,7 @@
             // 
             // C2
             // 
+            this.C2.Enabled = false;
             this.C2.Location = new System.Drawing.Point(401, 64);
             this.C2.Name = "C2";
             this.C2.Size = new System.Drawing.Size(100, 100);
@@ -190,6 +204,7 @@
             // 
             // C1
             // 
+            this.C1.Enabled = false;
             this.C1.Location = new System.Drawing.Point(265, 64);
             this.C1.Name = "C1";
             this.C1.Size = new System.Drawing.Size(100, 100);

@@ -238,7 +238,7 @@ namespace WAD_Server
                 {
                     if (m.Title == movie)
                     {
-                        string[] bookedSeats = m.ShowTime[date + time];
+                        string[] bookedSeats = m.ShowTime[date + ";" + time];
 
                         if (bookedSeats == null || bookedSeats.Length == 0)
                         {
@@ -266,7 +266,7 @@ namespace WAD_Server
                                 }
                             }
                             // converts back to string[] and update ShowTime
-                            m.ShowTime[date + time] = list.ToArray();
+                            m.ShowTime[date + ";" + time] = list.ToArray();
                         }
                         else
                         {
@@ -423,13 +423,13 @@ namespace WAD_Server
                 {
                     if (m.Title == movie)
                     {
-                        string[] bookedSeats = m.ShowTime[date + time];
+                        string[] bookedSeats = m.ShowTime[date + ";" + time];
                         List<string> list = new List<string>(bookedSeats);
                         foreach (string s in seats)
                         {
                             list.Add(s);
                         }
-                        m.ShowTime[date + time] = list.ToArray();
+                        m.ShowTime[date + ";" + time] = list.ToArray();
                         break;
                     }
                 }
