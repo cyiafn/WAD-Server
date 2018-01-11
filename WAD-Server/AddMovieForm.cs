@@ -77,7 +77,7 @@ namespace WAD_Server
             }
 
             variables.movieList.Add(newMovie);
-            f.SetText(title + " added to Movie List.");
+            f.SetText(title + " has been added to Movie List.");
             MessageBox.Show(title + " has been added.");
             this.Close();
         }
@@ -99,7 +99,7 @@ namespace WAD_Server
                     // Image file path
                     txtImage.Text = ofd.SafeFileName;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     MessageBox.Show("Error: could not read image from disk.");
                 }

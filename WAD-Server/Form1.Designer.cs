@@ -38,6 +38,7 @@
             this.btnStatus = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnViewSpecificMovie = new System.Windows.Forms.Button();
+            this.btnSaveLog = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAddMovie
@@ -128,11 +129,22 @@
             this.btnViewSpecificMovie.UseVisualStyleBackColor = true;
             this.btnViewSpecificMovie.Click += new System.EventHandler(this.btnViewSpecificMovie_Click);
             // 
+            // btnSaveLog
+            // 
+            this.btnSaveLog.Location = new System.Drawing.Point(837, 494);
+            this.btnSaveLog.Name = "btnSaveLog";
+            this.btnSaveLog.Size = new System.Drawing.Size(190, 88);
+            this.btnSaveLog.TabIndex = 9;
+            this.btnSaveLog.Text = "Save Server Log";
+            this.btnSaveLog.UseVisualStyleBackColor = true;
+            this.btnSaveLog.Click += new System.EventHandler(this.btnSaveLog_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(14F, 29F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1070, 626);
+            this.Controls.Add(this.btnSaveLog);
             this.Controls.Add(this.btnViewSpecificMovie);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnStatus);
@@ -161,6 +173,7 @@
         private System.Windows.Forms.Button btnStatus;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnViewSpecificMovie;
+        private System.Windows.Forms.Button btnSaveLog;
     }
 }
 

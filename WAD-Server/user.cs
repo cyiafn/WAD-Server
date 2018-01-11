@@ -14,7 +14,6 @@ namespace WAD_Server
         private string email;
         private string password;
         private string dob;
-        private List<user> userList = new List<user>();
 
         public void intializeUser(string fName, string mName, string lName, string Email, string pw, string date)
         {
@@ -48,6 +47,5 @@ namespace WAD_Server
         public void setPassword(string pw) { this.password = pw; }
         public void setDOB(string DOB) { this.dob = DOB; }
         public string getDOB() { return this.dob; }
-        public List<user> GetList() { return userList; }
     }
 }

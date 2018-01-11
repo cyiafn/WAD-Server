@@ -1,0 +1,7 @@
+10: 09:47 PM:Waiting for clients on port 9000.
+10: 10:14 PM:New client accepted : 1 active connections.
+10: 11:13 PM:Client disconnected : 0 active connections.
+10: 11:53 PM:Spiderman has been added to Movie List.
+10: 12:05 PM:An booking from txt file seats are already reserved!
+10: 12:05 PM:Booking details has been loaded.
+

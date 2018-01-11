@@ -16,7 +16,10 @@ namespace WAD_Server
         {
             InitializeComponent();
 
+            // Populates the data grid view with all booking initally
             populateDataGrid();
+
+            cbFilter.SelectedIndex = 1;
         }
 
         public void populateDataGrid()
@@ -28,7 +31,7 @@ namespace WAD_Server
             dgvBooking.Columns.Add("Date", "Date");
             dgvBooking.Columns.Add("Timeslot", "Timeslot");
             dgvBooking.Columns.Add("Seat(s)", "Seat(s)");
-            //dgvBooking.DataSource = variables.bookingList.ToList();
+
             foreach (Booking details in variables.bookingList)
             {
                 string seats = string.Join(",", details.Seats);
@@ -51,6 +54,53 @@ namespace WAD_Server
                 // set width to calculated by autosize
                 dgvBooking.Columns[i].Width = colw;
             }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            dgvBooking.Rows.Clear();
+
+            string input = txtSearch.Text.Trim();
+            string filter = cbFilter.Text;
+
+            // Search based on filter, default is Name
+            if (filter == "Name")
+            {
+                foreach (Booking details in variables.bookingList)
+                {
+                    if (details.User.ToLower() == input.ToLower() || details.User.StartsWith(input))
+                    {
+                        string seats = string.Join(",", details.Seats);
+                        dgvBooking.Rows.Add(new object[] { details.TransactionId, details.Movie, details.User,
+                    details.Price, details.Date, details.Timeslot, seats });
+                    }
+                }
+            }
+            else if (filter == "Movie")
+            {
+                foreach (Booking details in variables.bookingList)
+                {
+                    if (details.Movie.ToLower() == input.ToLower() || details.Movie.StartsWith(input))
+                    {
+                        string seats = string.Join(",", details.Seats);
+                        dgvBooking.Rows.Add(new object[] { details.TransactionId, details.Movie, details.User,
+                    details.Price, details.Date, details.Timeslot, seats });
+                    }
+                }
+            }
+            else
+            {
+                foreach (Booking details in variables.bookingList)
+                {
+                    if (details.TransactionId.ToLower() == input.ToLower())
+                    {
+                        string seats = string.Join(",", details.Seats);
+                        dgvBooking.Rows.Add(new object[] { details.TransactionId, details.Movie, details.User,
+                    details.Price, details.Date, details.Timeslot, seats });
+                    }
+                }
+            }
+            
         }
     }
 }

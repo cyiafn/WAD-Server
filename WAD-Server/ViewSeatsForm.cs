@@ -29,6 +29,8 @@ namespace WAD_Server
             updateSeats();
         }
 
+        // To set the button to enabled and preventing cross-thread issues
+        #region SetButton() function
         public void SetButton(Button b)
         {
             if (this.InvokeRequired)
@@ -39,6 +41,7 @@ namespace WAD_Server
             }
             b.Enabled = true;
         }
+        #endregion
 
         // Updates the seating chart to enable buttons if not reserved
         #region updateSeats() function
@@ -56,6 +59,7 @@ namespace WAD_Server
 
                         foreach(string seat in seats)
                         {
+                            // Find control of the button by given string in string[]
                             b = this.Controls.Find(seat, true).FirstOrDefault() as Button;
                             SetButton(b);
                         }
@@ -63,7 +67,7 @@ namespace WAD_Server
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Error occured, please try again.");
             }

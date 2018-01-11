@@ -21,7 +21,6 @@ namespace WAD_Server
             this.TransactionId = transactionId;
             this.Movie = movie;
             this.User = user;
-            //this.Seat = seat;
             this.Price = price;
             this.Date = date;
             this.Timeslot = timeslot;

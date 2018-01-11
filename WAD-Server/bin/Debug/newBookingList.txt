@@ -1,0 +1,6 @@
+1;Spiderman;2;16/01/2018;2PM;A1
+2;Spiderman;2;10/01/2018;2PM;A1|A3|A4
+3;Spiderman;2;19/01/2018;2PM;B1|B2|B3
+4;Spiderman;2;19/12/2017;2PM;B1
+5;Spiderman;200;13/01/2018;2PM;A1|A2|A4|A5|B2
+6;Spiderman;200;13/01/2018;2PM;C2|C4

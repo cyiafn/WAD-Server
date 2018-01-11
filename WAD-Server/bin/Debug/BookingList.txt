@@ -1,4 +1,7 @@
-1;movietitle;alan;2.00;18/2/17;2PM;A1
-2;movietitle;alan;2.00;18/2/17;2PM;A1|A3|A4
-3;movietitle;alan;2.00;18/2/17;2PM;B1|B2|B3
-3;movietitle;alan;2.00;18/2/17;2PM;B1
+1;Spiderman;Seanmarcus;2.00;16/01/2018;2PM;A1
+2;Spiderman;Sean;2.00;10/01/2018;2PM;A1|A3|A4
+3;Spiderman;Marcus;2.00;19/01/2018;2PM;B1|B2|B3
+4;Spiderman;Lee;2.00;19/12/2017;2PM;B1
+5;Spiderman;Test;200;13/01/2018;2PM;A1|A2|A4|A5|B2
+6;Spiderman;Booking;200;13/01/2018;2PM;C2|C4
+6;Spiderman;CollideTest;200;13/01/2018;2PM;C2|A2|A5

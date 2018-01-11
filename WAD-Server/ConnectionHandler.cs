@@ -39,7 +39,7 @@ namespace WAD_Server
                 connections++;
                 //arrSocket.Add(client);
 
-                f.SetText("New client accepted : " + connections + " active connections");
+                f.SetText("New client accepted : " + connections + " active connections.");
 
                 string input;
                 while (true)
@@ -80,12 +80,12 @@ namespace WAD_Server
                 ns.Close();
                 client.Close();
                 connections--;
-                f.SetText("Client disconnected : " + connections + " active connections");
+                f.SetText("Client disconnected : " + connections + " active connections.");
             }
             catch (Exception)
             {
                 connections--;
-                f.SetText("Client disconnected : " + connections + " active connections");
+                f.SetText("Client disconnected : " + connections + " active connections.");
             }
         }
 
