@@ -177,19 +177,32 @@ namespace WAD_Server
             {
                 var xs = new XmlSerializer(typeof(HashSet<Movie>));
                 string xml;
-                using (var writer = new StringWriter())
+                using (var write = new StringWriter())
                 {
-                    xs.Serialize(writer, variables.movieList);
-                    xml = writer.ToString();
-                    writer.WriteLine(xml);
+                    xs.Serialize(write, variables.movieList);
+                    xml = write.ToString();
+                    //writer.WriteLine(xml);
                 }
-
-                //using (var reader = new StringReader(xml))
+                writer.WriteLine(xml);
+                writer.WriteLine("endofxml");
+                // solution from socketdemo
+                //var xs = new XmlSerializer(typeof(HashSet<WAD_Server.Movie>));
+                ////string xml = reader.ReadLine();
+                //string xml = "";
+                //string line;
+                //using (reader)
                 //{
-                //    var set2 = (HashSet<Movie>)xs.Deserialize(reader);
-                //    foreach (Movie s in set2)
+                //    while ((line = reader.ReadLine()) != "endofxml")
                 //    {
-                //        f.SetText("SendMovieList()");
+                //        xml += line;
+                //    }
+                //}
+                //using (var read = new StringReader(xml))
+                //{
+                //    var set2 = (HashSet<WAD_Server.Movie>)xs.Deserialize(read);
+                //    foreach (WAD_Server.Movie s in set2)
+                //    {
+                //        writer.WriteLine(s);
                 //    }
                 //}
 
