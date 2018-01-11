@@ -327,12 +327,8 @@ namespace WAD_Server
             if (dlg.ShowDialog() == DialogResult.OK)
             {
                 // Save document
-                StreamWriter writer = new StreamWriter(dlg.OpenFile());
+                File.WriteAllLines(dlg.FileName, txtDisplay.Lines);
 
-                writer.WriteLine(txtDisplay.Text);
-                
-                writer.Dispose();
-                writer.Close();
                 SetText("Server log has been saved.");
                 MessageBox.Show("Server log has been saved!");
             }
