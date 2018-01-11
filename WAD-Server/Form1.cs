@@ -86,6 +86,7 @@ namespace WAD_Server
                 return;
             }
             cbMovies.Items.Add(title);
+            cbMovies.Refresh();
         }
         #endregion
 
@@ -200,7 +201,6 @@ namespace WAD_Server
                                     count++;
                                 }
                             }
-                            cbMovies.Refresh();
                         }
                         await PutTaskDelay();
                     }

@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace WAD_Server
 {
@@ -167,33 +168,49 @@ namespace WAD_Server
             writer = new StreamWriter(ns);
             writer.AutoFlush = true;
 
-            byte[] fileNameByte;
-            byte[] fileData;
+            //byte[] fileNameByte;
+            //byte[] fileData;
             try
             {
-                foreach (Movie item in variables.movieList)
+                var xs = new XmlSerializer(typeof(HashSet<Movie>));
+                string xml;
+                using (var writer = new StringWriter())
                 {
-                    // If Movie is showing, send info. (?)
-                    if (item.Status == true)
-                    {
-                        fileNameByte = Encoding.ASCII.GetBytes(item.ImageFileName);
-                        fileData = File.ReadAllBytes(item.ImageFileName);
-
-                        // sends the title, filename, file data bytes and file data
-                        writer.WriteLine(item.Title);
-                        writer.WriteLine(item.ImageFileName);
-                        writer.WriteLine(fileData.Length);
-                        client.Send(fileData);
-                    }
-                    writer.WriteLine("sent");
+                    xs.Serialize(writer, variables.movieList);
+                    xml = writer.ToString();
+                    writer.WriteLine(xml);
                 }
+
+                //using (var reader = new StringReader(xml))
+                //{
+                //    var set2 = (HashSet<Movie>)xs.Deserialize(reader);
+                //    foreach (Movie s in set2)
+                //    {
+                //        f.SetText("SendMovieList()");
+                //    }
+                //}
+
+                //foreach (Movie item in variables.movieList)
+                //{
+                //    // If Movie is showing, send info. (?)
+                //    if (item.Status == true)
+                //    {
+                //        fileNameByte = Encoding.ASCII.GetBytes(item.ImageFileName);
+                //        fileData = File.ReadAllBytes(item.ImageFileName);
+
+                //        // sends the title, filename, file data bytes and file data
+                //        writer.WriteLine(item.Title);
+                //        writer.WriteLine(item.ImageFileName);
+                //        writer.WriteLine(fileData.Length);
+                //        client.Send(fileData);
+                //    }
+                //}
+                writer.WriteLine("sent");
             }
             catch (Exception)
             {
                 f.SetText("Exception occured when sending movie list.");
             }
-            reader.Close();
-            writer.Close();
         }
 
         // Add booking to booking list
@@ -245,17 +262,32 @@ namespace WAD_Server
             try
             {
                 string user = reader.ReadLine();
+                bool found = false;
+                HashSet<Booking> newSet = new HashSet<Booking>();
 
                 foreach (Booking details in variables.bookingList)
                 {
                     if (details.User == user)
                     {
-                        writer.WriteLine(details.Movie);
-                        writer.WriteLine(details.Price);
-                        writer.WriteLine(details.Date);
-                        writer.WriteLine(details.Timeslot);
-                        // send string[] as a single string joined by |
-                        writer.WriteLine(string.Join("|", details.Seats));
+                        found = true;
+                        newSet.Add(details);
+                        //writer.WriteLine(details.Movie);
+                        //writer.WriteLine(details.Price);
+                        //writer.WriteLine(details.Date);
+                        //writer.WriteLine(details.Timeslot);
+                        //// send string[] as a single string joined by |
+                        //writer.WriteLine(string.Join("|", details.Seats));
+                    }
+                }
+                if (found)
+                {
+                    var xs = new XmlSerializer(typeof(HashSet<Booking>));
+                    string xml;
+                    using (var writer = new StringWriter())
+                    {
+                        xs.Serialize(writer, newSet);
+                        xml = writer.ToString();
+                        writer.WriteLine(xml);
                     }
                 }
                 writer.WriteLine("sent");
@@ -274,11 +306,13 @@ namespace WAD_Server
             writer = new StreamWriter(ns);
             writer.AutoFlush = true;
 
-            byte[] fileNameByte;
-            byte[] fileData;
+            //byte[] fileNameByte;
+            //byte[] fileData;
             try
             {
                 string input = reader.ReadLine();
+                bool found = false;
+                HashSet<Movie> newSet = new HashSet<Movie>();
 
                 foreach (Movie details in variables.movieList)
                 {
@@ -288,15 +322,28 @@ namespace WAD_Server
                         // If Movie is showing, send info. (?)
                         if (details.Status == true)
                         {
-                            fileNameByte = Encoding.ASCII.GetBytes(details.ImageFileName);
-                            fileData = File.ReadAllBytes(details.ImageFileName);
+                            found = true;
+                            newSet.Add(details);
+                            //fileNameByte = Encoding.ASCII.GetBytes(details.ImageFileName);
+                            //fileData = File.ReadAllBytes(details.ImageFileName);
 
-                            // sends the title, filename, file data bytes and file data
-                            writer.WriteLine(details.Title);
-                            writer.WriteLine(details.ImageFileName);
-                            writer.WriteLine(fileData.Length);
-                            client.Send(fileData);
+                            //// sends the title, filename, file data bytes and file data
+                            //writer.WriteLine(details.Title);
+                            //writer.WriteLine(details.ImageFileName);
+                            //writer.WriteLine(fileData.Length);
+                            //client.Send(fileData);
                         }
+                    }
+                }
+                if (found)
+                {
+                    var xs = new XmlSerializer(typeof(HashSet<Movie>));
+                    string xml;
+                    using (var writer = new StringWriter())
+                    {
+                        xs.Serialize(writer, newSet);
+                        xml = writer.ToString();
+                        writer.WriteLine(xml);
                     }
                 }
                 writer.WriteLine("sent");

@@ -31,6 +31,8 @@ namespace WAD_Server
             double price = 0;
             double.TryParse(txtPrice.Text.Trim(), out price);
             string imageFileName = txtImage.Text.Trim();
+            byte[] fileNameByte;
+            byte[] fileData;
 
             // Check if picture box has image, else check other fields
             if (pbPreview.Image == null)
@@ -58,9 +60,12 @@ namespace WAD_Server
                 return;
             }
 
+            fileNameByte = Encoding.ASCII.GetBytes(imageFileName);
+            fileData = File.ReadAllBytes(imageFileName);
+
             // Add new movie to MovieList list
             Movie newMovie = new Movie();
-            newMovie.initMovie(title, movieType, price, imageFileName);
+            newMovie.initMovie(title, movieType, price, imageFileName, fileNameByte, fileData);
 
             bool exist = variables.movieList.Contains(newMovie);
             if (exist)
