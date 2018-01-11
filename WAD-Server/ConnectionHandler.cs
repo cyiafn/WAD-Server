@@ -395,11 +395,12 @@ namespace WAD_Server
                 {
                     var xs = new XmlSerializer(typeof(HashSet<Movie>));
                     string xml;
-                    using (var writer = new StringWriter())
+                    using (var write = new StringWriter())
                     {
-                        xs.Serialize(writer, newSet);
-                        xml = writer.ToString();
+                        xs.Serialize(write, newSet);
+                        xml = write.ToString();
                         writer.WriteLine(xml);
+                        writer.WriteLine("endofxml");
                     }
                 }
                 else
