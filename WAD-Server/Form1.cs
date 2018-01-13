@@ -154,7 +154,7 @@ namespace WAD_Server
                                             // converts back to string[] and update ShowTime
                                             m.ShowTime[temp[4] + ";" + temp[5]] = list.ToArray();
                                             newbook.initBooking(temp[0], temp[1], temp[2], Convert.ToDouble(temp[3]), temp[4], temp[5], seats);
-                                            variables.bookingList.Add(newbook);
+                                            lock (variables.bookingList) variables.bookingList.Add(newbook);
                                         }
                                         else
                                         {
@@ -166,14 +166,14 @@ namespace WAD_Server
                                 {
                                     // Movie matches txt movie, but date/time given is outdated because ShowTime[key] does not exist anymore
                                     newbook.initBooking(temp[0], temp[1], temp[2], Convert.ToDouble(temp[3]), temp[4], temp[5], seats);
-                                    variables.bookingList.Add(newbook);
+                                    lock (variables.bookingList) variables.bookingList.Add(newbook);
                                 }
                             }
                         }
                         if (match == 0)
                         {
                             newbook.initBooking(temp[0], temp[1], temp[2], Convert.ToDouble(temp[3]), temp[4], temp[5], seats);
-                            variables.bookingList.Add(newbook);
+                            lock (variables.bookingList) variables.bookingList.Add(newbook);
                         }
                     }
                     SetText("Booking details has been loaded.");
@@ -284,7 +284,7 @@ namespace WAD_Server
             {
                 if (details.Title == movie)
                 {
-                    details.Status = !details.Status;
+                    lock (variables.movieList) details.Status = !details.Status;
                     if (details.Status)
                         MessageBox.Show(movie + " status has been changed to now showing.");
                     else

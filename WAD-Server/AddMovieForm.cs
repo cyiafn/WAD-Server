@@ -68,15 +68,19 @@ namespace WAD_Server
             // Add new movie to MovieList list
             Movie newMovie = new Movie();
             newMovie.initMovie(title, movieType, price, imageFileName, fileNameByte, fileData, videoUrl);
-
-            bool exist = variables.movieList.Contains(newMovie);
+            bool exist = false;
+            lock (variables.movieList)
+            {
+                exist = variables.movieList.Contains(newMovie);
+            }
+            //bool exist = variables.movieList.Contains(newMovie);
             if (exist)
             {
                 MessageBox.Show("Movie is already added");
                 return;
             }
 
-            variables.movieList.Add(newMovie);
+            lock (variables.movieList) variables.movieList.Add(newMovie);
             f.SetText(title + " has been added to Movie List.");
             MessageBox.Show(title + " has been added.");
             this.Close();

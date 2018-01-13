@@ -148,18 +148,24 @@ namespace WAD_Server
 
                 user newUser = new user();
                 newUser.intializeUser(firstName, middleName, lastName, email, password, dob);
-
-                bool exist = variables.userList.Contains(newUser);
+                bool exist = false;
+                lock (variables.userList)
+                {
+                    exist = variables.userList.Contains(newUser);
+                }
+                //bool exist = variables.userList.Contains(newUser);
                 if (exist)
                 {
                     writer.WriteLine("fail");
                     return;
                 }
-                variables.userList.Add(newUser);
+                lock (variables.userList) variables.userList.Add(newUser);
+                //variables.userList.Add(newUser);
                 writer.WriteLine("success");
             }
             catch (Exception)
             {
+                writer.WriteLine("fail");
                 f.SetText("Exception occured on register.");
             }
         }
@@ -224,6 +230,7 @@ namespace WAD_Server
             }
             catch (Exception)
             {
+                writer.WriteLine("fail");
                 f.SetText("Exception occured when sending movie list.");
             }
         }
@@ -284,7 +291,7 @@ namespace WAD_Server
                         else
                         {
                             writer.WriteLine("fail");
-                            writer.WriteLine("Seats selected are already reserved!");
+                            //writer.WriteLine("Seats selected are already reserved!");
                             return;
                         }
                         break;
@@ -295,12 +302,13 @@ namespace WAD_Server
                 newBook.initBooking(id, movie, user, price, date, time, seats);
 
                 // Hashset collection will prevent duplicates
-                variables.bookingList.Add(newBook);
-
+                lock (variables.bookingList) variables.bookingList.Add(newBook);
+                //variables.bookingList.Add(newBook);
                 f.SetText("New booking added to Booking List.");
             }
             catch (Exception)
             {
+                writer.WriteLine("fail");
                 f.SetText("Exception occured when adding client booking.");
             }
         }
@@ -444,14 +452,16 @@ namespace WAD_Server
                         {
                             list.Add(s);
                         }
-                        m.ShowTime[date + ";" + time] = list.ToArray();
+                        lock (variables.movieList) m.ShowTime[date + ";" + time] = list.ToArray();
+                        // m.ShowTime[date + ";" + time] = list.ToArray();
                         break;
                     }
                 }
 
                 Booking newBook = new Booking();
                 newBook.initBooking(id, movie, user, price, date, time, seats);
-                variables.bookingList.Remove(newBook);
+                lock (variables.bookingList) variables.bookingList.Remove(newBook);
+                //variables.bookingList.Remove(newBook);
 
                 f.SetText("Client's booking has been removed from Booking List.");
             }
