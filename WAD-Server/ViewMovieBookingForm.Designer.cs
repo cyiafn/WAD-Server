@@ -201,7 +201,7 @@
             this.Controls.Add(this.btn2PM);
             this.Controls.Add(this.btn12PM);
             this.Name = "ViewMovieBookingForm";
-            this.Text = "ViewMovieBookingForm";
+            this.Text = "Movie\'s Booking Viewer";
             ((System.ComponentModel.ISupportInitialize)(this.dgvBookingList)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -107,7 +107,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvBooking);
             this.Name = "ViewBookingForm";
-            this.Text = "ViewBookingForm";
+            this.Text = "View All Bookings";
             ((System.ComponentModel.ISupportInitialize)(this.dgvBooking)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

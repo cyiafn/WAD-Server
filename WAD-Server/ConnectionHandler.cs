@@ -23,6 +23,7 @@ namespace WAD_Server
         // Current way to keep track of multi socket (can be changed to dict<int, socket>)
         //public static ArrayList arrSocket = new ArrayList();
 
+        // Requires params socket client and form f to initalize
         public ConnectionHandler(Socket client, Form1 f)
         {
             this.client = client;
@@ -44,6 +45,7 @@ namespace WAD_Server
                 string input;
                 while (true)
                 {
+                    // Readline inputs from client request
                     input = reader.ReadLine();
 
                     if (input.ToLower() == "login")
@@ -89,7 +91,7 @@ namespace WAD_Server
             }
         }
 
-        //basic authorize without checks
+        // To authorize client login attempt
         public void Authorize()
         {
             ns = new NetworkStream(client);
@@ -126,11 +128,10 @@ namespace WAD_Server
             catch (Exception)
             {
                 f.SetText("Exception occured on login");
-                // some error when reading line (client disconnected etc)
             }
         }
 
-        //basic register
+        // To register client as new user
         public void Register()
         {
             ns = new NetworkStream(client);
@@ -148,20 +149,18 @@ namespace WAD_Server
 
                 user newUser = new user();
                 newUser.intializeUser(firstName, middleName, lastName, email, password, dob);
-                bool exist = false;
-                lock (variables.userList)
+                bool added = false;
+                lock (variables.userList) 
                 {
-                    exist = variables.userList.Contains(newUser);
+                    added = variables.userList.Add(newUser);
                 }
-                //bool exist = variables.userList.Contains(newUser);
-                if (exist)
+                if (!added)
                 {
                     writer.WriteLine("fail");
                     return;
                 }
-                lock (variables.userList) variables.userList.Add(newUser);
-                //variables.userList.Add(newUser);
-                writer.WriteLine("success");
+                else
+                    writer.WriteLine("success");
             }
             catch (Exception)
             {
@@ -177,17 +176,15 @@ namespace WAD_Server
             writer = new StreamWriter(ns);
             writer.AutoFlush = true;
 
-            //byte[] fileNameByte;
-            //byte[] fileData;
             try
             {
+                // Serialize movie hash set with class Movie properties
                 var xs = new XmlSerializer(typeof(HashSet<Movie>));
                 string xml;
                 using (var write = new StringWriter())
                 {
                     xs.Serialize(write, variables.movieList);
                     xml = write.ToString();
-                    //writer.WriteLine(xml);
                 }
                 writer.WriteLine(xml);
                 writer.WriteLine("endofxml");
@@ -301,9 +298,8 @@ namespace WAD_Server
                 Booking newBook = new Booking();
                 newBook.initBooking(id, movie, user, price, date, time, seats);
 
-                // Hashset collection will prevent duplicates
+                // Hashset collection will prevent duplicates, lock statement before carrying out operation
                 lock (variables.bookingList) variables.bookingList.Add(newBook);
-                //variables.bookingList.Add(newBook);
                 f.SetText("New booking added to Booking List.");
             }
             catch (Exception)
@@ -332,16 +328,11 @@ namespace WAD_Server
                     {
                         found = true;
                         newSet.Add(details);
-                        //writer.WriteLine(details.Movie);
-                        //writer.WriteLine(details.Price);
-                        //writer.WriteLine(details.Date);
-                        //writer.WriteLine(details.Timeslot);
-                        //// send string[] as a single string joined by |
-                        //writer.WriteLine(string.Join("|", details.Seats));
                     }
                 }
                 if (found)
                 {
+                    // If found, serialize newSet into XML to be sent to client
                     var xs = new XmlSerializer(typeof(HashSet<Booking>));
                     string xml;
                     using (var write = new StringWriter())
@@ -402,6 +393,7 @@ namespace WAD_Server
                 }
                 if (found)
                 {
+                    // If found, serialize newSet into XML to be sent to client
                     var xs = new XmlSerializer(typeof(HashSet<Movie>));
                     string xml;
                     using (var write = new StringWriter())
@@ -416,7 +408,6 @@ namespace WAD_Server
                 {
                     writer.WriteLine("fail");
                 }
-                //writer.WriteLine("sent");
             }
             catch (Exception)
             {
@@ -453,16 +444,14 @@ namespace WAD_Server
                             list.Add(s);
                         }
                         lock (variables.movieList) m.ShowTime[date + ";" + time] = list.ToArray();
-                        // m.ShowTime[date + ";" + time] = list.ToArray();
                         break;
                     }
                 }
 
                 Booking newBook = new Booking();
                 newBook.initBooking(id, movie, user, price, date, time, seats);
+                // Lock hash set before carrying out operation
                 lock (variables.bookingList) variables.bookingList.Remove(newBook);
-                //variables.bookingList.Remove(newBook);
-
                 f.SetText("Client's booking has been removed from Booking List.");
             }
             catch

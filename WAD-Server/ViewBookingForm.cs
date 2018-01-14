@@ -1,29 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Lee Wei Xiong, Seanmarcus, S10168234B
+// Features: populateDataGrid() and btnSearch_Click function
+using System;
 using System.Windows.Forms;
 
 namespace WAD_Server
 {
     public partial class ViewBookingForm : Form
     {
+        // Populates data grid on initalization
         public ViewBookingForm()
         {
             InitializeComponent();
 
             // Populates the data grid view with all booking initally
             populateDataGrid();
-
-            cbFilter.SelectedIndex = 1;
+            cbFilter.SelectedIndex = 0;
         }
 
+        // Populates data grid with all booking details
         public void populateDataGrid()
         {
+            // Adds columns to data grid view
             dgvBooking.Columns.Add("ID", "ID");
             dgvBooking.Columns.Add("Movie", "Movie");
             dgvBooking.Columns.Add("User", "User");
@@ -56,6 +53,7 @@ namespace WAD_Server
             }
         }
 
+        // Searches the hash set on click
         private void btnSearch_Click(object sender, EventArgs e)
         {
             dgvBooking.Rows.Clear();

@@ -284,7 +284,7 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.A1);
             this.Name = "ViewSeatsForm";
-            this.Text = "ViewSeatsForm";
+            this.Text = "Seat Diagram";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);

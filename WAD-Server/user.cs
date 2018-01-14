@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WAD_Server
 {
@@ -25,11 +21,13 @@ namespace WAD_Server
             this.dob = date;
         }
 
+        // Compares user email with other email
         public bool Equals(user other)
         {
             return email.Equals(other.email);
         }
 
+        // Overrides the hash code to return hash code for email
         public override int GetHashCode()
         {
             return email.GetHashCode();

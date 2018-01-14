@@ -1,12 +1,9 @@
-﻿using System;
+﻿// Lee Wei Xiong, Seanmarcus, S10168234B
+// Features: runServer(), populateCBox(), loadBooking() function
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Windows.Forms;
@@ -18,7 +15,7 @@ namespace WAD_Server
     {
         // Server's socket
         Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-        // Declare delegate
+        // Delegation for text call back
         public delegate void SetTextCallback(string msg);
 
         public Form1()
@@ -35,7 +32,7 @@ namespace WAD_Server
             txtDisplay.BackColor = System.Drawing.SystemColors.Window;
         }
 
-        // Code to start the server
+        // Code to start the server in async
         #region runServer()
         async void runServer()
         {
@@ -51,6 +48,7 @@ namespace WAD_Server
                 {
                     try
                     {
+                        // On client accept, thread pool will handle connection
                         Socket client = server.Accept();
                         ConnectionHandler handler = new ConnectionHandler(client, this);
                         ThreadPool.QueueUserWorkItem(new WaitCallback(handler.HandleConnection));
@@ -64,7 +62,7 @@ namespace WAD_Server
         }
         #endregion
 
-        // To prevent cross-threading and set text
+        // To prevent cross-threading and set text, params are string msg
         #region setText() function
         public void SetText(string msg)
         {
@@ -75,11 +73,10 @@ namespace WAD_Server
                 return;
             }
             txtDisplay.AppendText(DateTime.Now.ToString("h: mm:ss tt") + ":" + msg + "\n");
-            //txtDisplay.Text = msg;
         }
         #endregion
 
-        // To prevent cross-threading and add title to combo box
+        // To prevent cross-threading and add title to combo box, params are string title
         #region addTitle() function
         public void addTitle(string title)
         {
@@ -154,6 +151,7 @@ namespace WAD_Server
                                             // converts back to string[] and update ShowTime
                                             m.ShowTime[temp[4] + ";" + temp[5]] = list.ToArray();
                                             newbook.initBooking(temp[0], temp[1], temp[2], Convert.ToDouble(temp[3]), temp[4], temp[5], seats);
+                                            // Locks hash set booking list before modification
                                             lock (variables.bookingList) variables.bookingList.Add(newbook);
                                         }
                                         else
@@ -216,7 +214,7 @@ namespace WAD_Server
         }
         #endregion
 
-        // To populate combobox (updates every 30 seconds)
+        // To populate combobox (updates every 30 seconds), async method
         #region populateCBox() function
         async void populateCBox()
         {
@@ -249,6 +247,7 @@ namespace WAD_Server
                                 }
                             }
                         }
+                        // Calls PutTaskDelay() to delay task by 30s
                         await PutTaskDelay();
                     }
                     catch (Exception ex)
@@ -307,14 +306,14 @@ namespace WAD_Server
                 MessageBox.Show("Please select view movie from drop down list Movie List.");
                 return;
             }
-
+            // Opens a new form to view movie's booking details
             variables.selectedMovie = movie;
             ViewMovieBookingForm form2 = new ViewMovieBookingForm();
             form2.Show();
         }
         #endregion
 
-        // To save txtdisplay.text to file
+        // To save txtdisplay.text to a file
         #region saveServerLog() function
         public void saveServerLog()
         {
@@ -376,6 +375,7 @@ namespace WAD_Server
         #endregion
     }
 
+    // Global variables used between forms
     public class variables
     {
         public static HashSet<Booking> bookingList = new HashSet<Booking>();

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Lee Wei Xiong, Seanmarcus, S10168234B
+// Features: Equals and override hash functions
+using System;
 
 namespace WAD_Server
 {
@@ -16,6 +14,7 @@ namespace WAD_Server
         public String Timeslot { get; set; }
         public String[] Seats { get; set; }
 
+        // Initalize Booking object
         public void initBooking(String transactionId, String movie, String user, double price, String date, String timeslot, String[] seats)
         {
             this.TransactionId = transactionId;
@@ -27,11 +26,13 @@ namespace WAD_Server
             this.Seats = seats;
         }
 
+        // Compares booking transaction id with other transaction id
         public bool Equals(Booking other)
         {
             return TransactionId.Equals(other.TransactionId);
         }
 
+        // Overrides the hash code to return hash code for id
         public override int GetHashCode()
         {
             return TransactionId.GetHashCode();

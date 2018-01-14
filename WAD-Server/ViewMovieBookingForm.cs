@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// Lee Wei Xiong, Seanmarcus, S10168234B
+// Features: UpdateGVBookingList() and UpdateCBDate() function
+using System;
 using System.Windows.Forms;
 
 namespace WAD_Server
@@ -17,6 +12,7 @@ namespace WAD_Server
 
         public delegate void SetTextCallback(string msg);
 
+        // On initialization, populates the combo box with dates of selected movie
         public ViewMovieBookingForm()
         {
             InitializeComponent();
@@ -28,7 +24,7 @@ namespace WAD_Server
             UpdateCBDate();
         }
 
-        // Sets the text
+        // Sets the text for label
         #region SetText() function
         public void SetText(string msg)
         {
@@ -83,6 +79,7 @@ namespace WAD_Server
         #region UpdateGVBookingList() function
         public void UpdateGVBookingList()
         {
+            // Clear previous data and add rows
             dgvBookingList.Rows.Clear();
             dgvBookingList.Columns.Clear();
             dgvBookingList.Columns.Add("ID", "ID");
@@ -112,6 +109,7 @@ namespace WAD_Server
         #endregion
 
         // Button click events for all buttons in the form
+        // Opens a new form on btnViewSeats_Click
         #region Button_Click events
         private void btnViewSeats_Click(object sender, EventArgs e)
         {
@@ -170,6 +168,7 @@ namespace WAD_Server
             SetText(TimeSelected);
         }
 
+        // Calls UpdateGVBookingList() on button click
         private void btnViewBookingList_Click(object sender, EventArgs e)
         {
             UpdateGVBookingList();

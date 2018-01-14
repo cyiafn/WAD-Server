@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿// Lee Wei Xiong, Seanmarcus, S10168234B
+// Features: updateSeats() function to enable/disable buttons to emulate booked seats
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WAD_Server
@@ -17,6 +13,7 @@ namespace WAD_Server
         private string dateGiven = null;
         private string movieGiven = null;
 
+        // Requires movie, time and date to initalize form
         public ViewSeatsForm(string movie, string time, string date)
         {
             InitializeComponent();
@@ -29,7 +26,7 @@ namespace WAD_Server
             updateSeats();
         }
 
-        // To set the button to enabled and preventing cross-thread issues
+        // To set the button to enabled and prevent cross-thread issues
         #region SetButton() function
         public void SetButton(Button b)
         {
@@ -59,7 +56,7 @@ namespace WAD_Server
 
                         foreach(string seat in seats)
                         {
-                            // Find control of the button by given string in string[]
+                            // Find control of the button by given string in string array
                             b = this.Controls.Find(seat, true).FirstOrDefault() as Button;
                             SetButton(b);
                         }
