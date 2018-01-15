@@ -19,9 +19,6 @@ namespace WAD_Server
         private StreamWriter writer;
         private static int connections = 0;
         private Form1 f;
-        
-        // Current way to keep track of multi socket (can be changed to dict<int, socket>)
-        //public static ArrayList arrSocket = new ArrayList();
 
         // Requires params socket client and form f to initalize
         public ConnectionHandler(Socket client, Form1 f)
@@ -38,7 +35,6 @@ namespace WAD_Server
                 reader = new StreamReader(ns);
                 writer = new StreamWriter(ns);
                 connections++;
-                //arrSocket.Add(client);
 
                 f.SetText("New client accepted : " + connections + " active connections.");
 
@@ -80,8 +76,8 @@ namespace WAD_Server
                     {
                         removeBooking();
                     }
-                    else if (input.ToLower() == "terminate")
-                        break;
+                    //else if (input.ToLower() == "terminate")
+                    //    break;
                 }
                 ns.Close();
                 client.Close();
@@ -110,6 +106,7 @@ namespace WAD_Server
                 
                 foreach (user details in variables.userList)
                 {
+                    // Check if email and password match in user hash set
                     if ((details.getEmail() == email) && (details.getPassword() == password))
                     {
                         authorized = true;
@@ -144,6 +141,7 @@ namespace WAD_Server
 
             try
             {
+                // Reads user properties
                 string email = reader.ReadLine();
                 string password = reader.ReadLine();
                 string firstName = reader.ReadLine();
@@ -154,10 +152,12 @@ namespace WAD_Server
                 user newUser = new user();
                 newUser.intializeUser(firstName, middleName, lastName, email, password, dob);
                 bool added = false;
+                // Lock user hash set before add operation
                 lock (variables.userList) 
                 {
                     added = variables.userList.Add(newUser);
                 }
+                // If add returns a false
                 if (!added)
                 {
                     writer.WriteLine("fail");
@@ -189,45 +189,9 @@ namespace WAD_Server
                 {
                     xs.Serialize(write, variables.movieList);
                     xml = write.ToString();
+                    writer.WriteLine(xml);
+                    writer.WriteLine("endofxml");
                 }
-                writer.WriteLine(xml);
-                writer.WriteLine("endofxml");
-                // solution from socketdemo
-                //var xs = new XmlSerializer(typeof(HashSet<WAD_Server.Movie>));
-                ////string xml = reader.ReadLine();
-                //string xml = "";
-                //string line;
-                //using (reader)
-                //{
-                //    while ((line = reader.ReadLine()) != "endofxml")
-                //    {
-                //        xml += line;
-                //    }
-                //}
-                //using (var read = new StringReader(xml))
-                //{
-                //    var set2 = (HashSet<WAD_Server.Movie>)xs.Deserialize(read);
-                //    foreach (WAD_Server.Movie s in set2)
-                //    {
-                //        writer.WriteLine(s);
-                //    }
-                //}
-
-                //foreach (Movie item in variables.movieList)
-                //{
-                //    // If Movie is showing, send info. (?)
-                //    if (item.Status == true)
-                //    {
-                //        fileNameByte = Encoding.ASCII.GetBytes(item.ImageFileName);
-                //        fileData = File.ReadAllBytes(item.ImageFileName);
-
-                //        // sends the title, filename, file data bytes and file data
-                //        writer.WriteLine(item.Title);
-                //        writer.WriteLine(item.ImageFileName);
-                //        writer.WriteLine(fileData.Length);
-                //        client.Send(fileData);
-                //    }
-                //}
             }
             catch (Exception)
             {
@@ -244,33 +208,37 @@ namespace WAD_Server
             writer.AutoFlush = true;
             try
             {
+                // Reads movie title that client has selected
                 string movie = reader.ReadLine();
-                HashSet<Movie> newSet = new HashSet<Movie>();
-
+                List<string> newList = new List<string>();
+                string[] seats;
+                string seat = null;
+                // Iterates through movie hash set to find matching title
                 foreach (Movie m in variables.movieList)
                 {
                     if (movie == m.Title)
                     {
-                        newSet.Add(m);
+                        // Converts concurrent dictionary to purely a string and add to list
+                        foreach (var showtime in m.ShowTime)
+                        {
+                            seats = showtime.Value;
+                            seat =  showtime.Key + ";" + String.Join("|", seats);
+                            newList.Add(seat);
+                        }
                         break;
                     }
                 }
-
-                XmlAttributeOverrides xOver = new XmlAttributeOverrides();
-                XmlAttributes attrs = new XmlAttributes();
-                attrs.XmlIgnore = false;
-                xOver.Add(typeof(Movie), "ShowTime", attrs);
-                var xs = new XmlSerializer(typeof(HashSet<Movie>), xOver);
+                // Serialize List<string> of show times to be sent to client
+                var xs = new XmlSerializer(typeof(List<string>));
                 string xml;
 
                 using (var write = new StringWriter())
                 {
-                    xs.Serialize(write, newSet);
+                    xs.Serialize(write, newList);
                     xml = write.ToString();
                     writer.WriteLine(xml);
                     writer.WriteLine("endofxml");
                 }
-
             }
             catch (Exception)
             {
@@ -409,8 +377,6 @@ namespace WAD_Server
             writer = new StreamWriter(ns);
             writer.AutoFlush = true;
 
-            //byte[] fileNameByte;
-            //byte[] fileData;
             try
             {
                 string input = reader.ReadLine();
@@ -427,14 +393,6 @@ namespace WAD_Server
                         {
                             found = true;
                             newSet.Add(details);
-                            //fileNameByte = Encoding.ASCII.GetBytes(details.ImageFileName);
-                            //fileData = File.ReadAllBytes(details.ImageFileName);
-
-                            //// sends the title, filename, file data bytes and file data
-                            //writer.WriteLine(details.Title);
-                            //writer.WriteLine(details.ImageFileName);
-                            //writer.WriteLine(fileData.Length);
-                            //client.Send(fileData);
                         }
                     }
                 }
@@ -490,6 +448,7 @@ namespace WAD_Server
                         {
                             list.Add(s);
                         }
+                        // Locks movie hash set before setting the value
                         lock (variables.movieList) m.ShowTime[date + ";" + time] = list.ToArray();
                         break;
                     }
