@@ -56,6 +56,10 @@ namespace WAD_Server
                     {
                         SendMovieList();
                     }
+                    else if (input.ToLower() == "request_showtime")
+                    {
+                        SendMovieShowTime();
+                    }
                     else if (input.ToLower() == "book_movie")
                     {
                         AddClientBooking();
@@ -229,6 +233,49 @@ namespace WAD_Server
             {
                 writer.WriteLine("fail");
                 f.SetText("Exception occured when sending movie list.");
+            }
+        }
+
+        // Send movie show time property
+        public void SendMovieShowTime()
+        {
+            ns = new NetworkStream(client);
+            writer = new StreamWriter(ns);
+            writer.AutoFlush = true;
+            try
+            {
+                string movie = reader.ReadLine();
+                HashSet<Movie> newSet = new HashSet<Movie>();
+
+                foreach (Movie m in variables.movieList)
+                {
+                    if (movie == m.Title)
+                    {
+                        newSet.Add(m);
+                        break;
+                    }
+                }
+
+                XmlAttributeOverrides xOver = new XmlAttributeOverrides();
+                XmlAttributes attrs = new XmlAttributes();
+                attrs.XmlIgnore = false;
+                xOver.Add(typeof(Movie), "ShowTime", attrs);
+                var xs = new XmlSerializer(typeof(HashSet<Movie>), xOver);
+                string xml;
+
+                using (var write = new StringWriter())
+                {
+                    xs.Serialize(write, newSet);
+                    xml = write.ToString();
+                    writer.WriteLine(xml);
+                    writer.WriteLine("endofxml");
+                }
+
+            }
+            catch (Exception)
+            {
+                writer.WriteLine("fail");
+                f.SetText("Exception occured when sending movie show times.");
             }
         }
 
