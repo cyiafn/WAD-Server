@@ -86,6 +86,7 @@ namespace WAD_Server
             }
             else
             {
+                f.populateMovieList();
                 f.SetText(title + " has been added to Movie List.");
                 MessageBox.Show(title + " has been added.");
                 this.Close();

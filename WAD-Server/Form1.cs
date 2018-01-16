@@ -26,7 +26,7 @@ namespace WAD_Server
             runServer();
 
             // Populates combobox with movies
-            populateCBox();
+            populateMovieList();
 
             txtDisplay.ReadOnly = true;
             txtDisplay.BackColor = System.Drawing.SystemColors.Window;
@@ -214,56 +214,26 @@ namespace WAD_Server
         }
         #endregion
 
-        // To populate combobox (updates every 30 seconds), async method
-        #region populateCBox() function
-        async void populateCBox()
+        // To populate combobox movie list
+        #region populateMovieList() function
+        public void populateMovieList()
         {
-            await Task.Run(async () =>
+            foreach (Movie details in variables.movieList)
             {
-                int count = 0;
-                while (true)
+                try
                 {
-                    try
+                    // check status of movie and remove accordingly
+                    if (!cbMovies.Items.Contains(details.Title))
                     {
-                        if (count == 0)
-                        {
-                            foreach (Movie details in variables.movieList)
-                            {
-                                // Prevent cross thread from happening here
-                                addTitle(details.Title);
-                                count++;
-                            }
-                        }
-                        else if (count != variables.movieList.Count)
-                        {
-                            foreach (Movie details in variables.movieList)
-                            {
-                                // check status of movie and remove accordingly
-                                if (!cbMovies.Items.Contains(details.Title))
-                                {
-                                    // Prevent cross thread from happening here
-                                    addTitle(details.Title);
-                                    count++;
-                                }
-                            }
-                        }
-                        // Calls PutTaskDelay() to delay task by 30s
-                        await PutTaskDelay();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
+                        // Prevent cross thread from happening here
+                        addTitle(details.Title);
                     }
                 }
-            });
-        }
-        #endregion
-
-        // Code to delay tasks without affecting UI
-        #region PutTaskDelay()
-        async Task PutTaskDelay()
-        {
-            await Task.Delay(30000);
+                catch (Exception ex)
+                {
+                    SetText("Exception occurred while adding movie to movie combo box.");
+                }
+            }
         }
         #endregion
 
