@@ -140,5 +140,11 @@ namespace WAD_Server
         {
             addMovie();
         }
+
+        // Closes the add movie form
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
