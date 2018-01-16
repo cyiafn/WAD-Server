@@ -451,10 +451,12 @@ namespace WAD_Server
                     {
                         string[] bookedSeats = m.ShowTime[clientBooking.Date + ";" + clientBooking.Timeslot];
                         List<string> list = new List<string>(bookedSeats);
-                        foreach (string s in clientBooking.Seats)
-                        {
-                            list.Add(s);
-                        }
+                        List<string> tempList = clientBooking.Seats.OfType<string>().ToList();
+                        list.AddRange(tempList);
+                        //foreach (string s in clientBooking.Seats)
+                        //{
+                        //    list.Add(s);
+                        //}
                         // Locks movie hash set before setting the value
                         lock (variables.movieList) m.ShowTime[clientBooking.Date + ";" + clientBooking.Timeslot] = list.ToArray();
                         lock (variables.bookingList) variables.bookingList.Remove(clientBooking);
