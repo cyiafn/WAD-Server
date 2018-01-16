@@ -457,7 +457,14 @@ namespace WAD_Server
                         break;
                     }
                 }
-
+                if (clientBooking == null)
+                {
+                    writer.WriteLine("fail");
+                }
+                else
+                {
+                    writer.WriteLine("success");
+                }
                 foreach (Movie m in variables.movieList)
                 {
                     if (m.Title == clientBooking.Movie)
