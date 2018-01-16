@@ -205,6 +205,7 @@ namespace WAD_Server
         {
             ns = new NetworkStream(client);
             writer = new StreamWriter(ns);
+            reader = new StreamReader(ns);
             writer.AutoFlush = true;
             try
             {
