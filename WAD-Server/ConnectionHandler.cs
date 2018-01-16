@@ -206,8 +206,8 @@ namespace WAD_Server
         public void SendMovieShowTime()
         {
             ns = new NetworkStream(client);
-            reader = new StreamReader(ns);
             writer = new StreamWriter(ns);
+            reader = new StreamReader(ns);
             writer.AutoFlush = true;
             try
             {
@@ -278,7 +278,6 @@ namespace WAD_Server
                         if (bookedSeats == null || bookedSeats.Length == 0)
                         {
                             writer.WriteLine("fail");
-                            writer.WriteLine("All seats are being reserved!");
                             return;
                         }
 
@@ -330,6 +329,7 @@ namespace WAD_Server
                         break;
                     }
                 }
+                writer.WriteLine("success");
                 f.SetText("New booking added to Booking List.");
             }
             catch (Exception)
