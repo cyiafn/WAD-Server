@@ -431,34 +431,66 @@ namespace WAD_Server
             try
             {
                 string id = reader.ReadLine();
-                string movie = reader.ReadLine();
-                string user = reader.ReadLine();
-                double price = Convert.ToDouble(reader.ReadLine());
-                string date = reader.ReadLine();
-                string time = reader.ReadLine();
-                string[] seats = (reader.ReadLine()).Split('|');
-
-                foreach (Movie m in variables.movieList)
+                //string movieTitle = null;
+                //string[] clientSeats;
+                var clientBooking = new Booking();
+                foreach (Booking b in variables.bookingList)
                 {
-                    if (m.Title == movie)
+                    if (b.TransactionId == id)
                     {
-                        string[] bookedSeats = m.ShowTime[date + ";" + time];
-                        List<string> list = new List<string>(bookedSeats);
-                        foreach (string s in seats)
-                        {
-                            list.Add(s);
-                        }
-                        // Locks movie hash set before setting the value
-                        lock (variables.movieList) m.ShowTime[date + ";" + time] = list.ToArray();
+                        clientBooking = b;
+                        //movieTitle = b.Movie;
+                        //clientSeats = b.Seats;
                         break;
                     }
                 }
 
-                Booking newBook = new Booking();
-                newBook.initBooking(id, movie, user, price, date, time, seats);
-                // Lock hash set before carrying out operation
-                lock (variables.bookingList) variables.bookingList.Remove(newBook);
-                f.SetText("Client's booking has been removed from Booking List.");
+                foreach (Movie m in variables.movieList)
+                {
+                    if (m.Title == clientBooking.Movie)
+                    {
+                        string[] bookedSeats = m.ShowTime[clientBooking.Date + ";" + clientBooking.Timeslot];
+                        List<string> list = new List<string>(bookedSeats);
+                        foreach (string s in clientBooking.Seats)
+                        {
+                            list.Add(s);
+                        }
+                        // Locks movie hash set before setting the value
+                        lock (variables.movieList) m.ShowTime[clientBooking.Date + ";" + clientBooking.Timeslot] = list.ToArray();
+                        lock (variables.bookingList) variables.bookingList.Remove(clientBooking);
+                        f.SetText("Client's booking has been removed from Booking List.");
+                        break;
+                    }
+                }
+
+                //string movie = reader.ReadLine();
+                //string user = reader.ReadLine();
+                //double price = Convert.ToDouble(reader.ReadLine());
+                //string date = reader.ReadLine();
+                //string time = reader.ReadLine();
+                //string[] seats = (reader.ReadLine()).Split('|');
+
+                //foreach (Movie m in variables.movieList)
+                //{
+                //    if (m.Title == movie)
+                //    {
+                //        string[] bookedSeats = m.ShowTime[date + ";" + time];
+                //        List<string> list = new List<string>(bookedSeats);
+                //        foreach (string s in seats)
+                //        {
+                //            list.Add(s);
+                //        }
+                //        // Locks movie hash set before setting the value
+                //        lock (variables.movieList) m.ShowTime[date + ";" + time] = list.ToArray();
+                //        break;
+                //    }
+                //}
+
+                //Booking newBook = new Booking();
+                //newBook.initBooking(id, movie, user, price, date, time, seats);
+                //// Lock hash set before carrying out operation
+                //lock (variables.bookingList) variables.bookingList.Remove(newBook);
+                //f.SetText("Client's booking has been removed from Booking List.");
             }
             catch
             {
