@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Class by Yifan
+// Features: Equals(), GetHashCode()
+using System;
 
 namespace WAD_Server
 {
@@ -21,7 +23,7 @@ namespace WAD_Server
             this.dob = date;
         }
 
-        // Compares user email with other email
+        // Compares user email with other email, params user object
         public bool Equals(user other)
         {
             return email.Equals(other.email);

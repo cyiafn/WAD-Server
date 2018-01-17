@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿// Lee Wei Xiong, Seanmarcus, S10168234B
+// Features: SendMovieList(), ViewClientBooking(), removeBooking()
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace WAD_Server
@@ -64,10 +62,6 @@ namespace WAD_Server
                     {
                         ViewClientBooking();
                     }
-                    else if (input.ToLower() == "search_movie")
-                    {
-                        SearchMovie();
-                    }
                     else if (input.ToLower() == "register")
                     {
                         Register();
@@ -76,8 +70,8 @@ namespace WAD_Server
                     {
                         removeBooking();
                     }
-                    //else if (input.ToLower() == "terminate")
-                    //    break;
+                    else if (input.ToLower() == "terminate")
+                        break;
                 }
                 ns.Close();
                 client.Close();
@@ -381,57 +375,6 @@ namespace WAD_Server
             catch (Exception)
             {
                 f.SetText("Exception occured when viewing client booking.");
-            }
-        }
-
-        // To search movie list based on client input
-        public void SearchMovie()
-        {
-            ns = new NetworkStream(client);
-            reader = new StreamReader(ns);
-            writer = new StreamWriter(ns);
-            writer.AutoFlush = true;
-
-            try
-            {
-                string input = reader.ReadLine();
-                bool found = false;
-                HashSet<Movie> newSet = new HashSet<Movie>();
-
-                foreach (Movie details in variables.movieList)
-                {
-                    // If the title matches user input or input matches title first few characters
-                    if (details.Title.ToLower() == input.ToLower() || details.Title.StartsWith(input.ToLower()))
-                    {
-                        // If Movie is showing, send info. (?)
-                        if (details.Status == true)
-                        {
-                            found = true;
-                            newSet.Add(details);
-                        }
-                    }
-                }
-                if (found)
-                {
-                    // If found, serialize newSet into XML to be sent to client
-                    var xs = new XmlSerializer(typeof(HashSet<Movie>));
-                    string xml;
-                    using (var write = new StringWriter())
-                    {
-                        xs.Serialize(write, newSet);
-                        xml = write.ToString();
-                        writer.WriteLine(xml);
-                        writer.WriteLine("endofxml");
-                    }
-                }
-                else
-                {
-                    writer.WriteLine("fail");
-                }
-            }
-            catch (Exception)
-            {
-                f.SetText("Exception occured when searching movie.");
             }
         }
 
