@@ -375,7 +375,7 @@ namespace WAD_Server
                 }
                 else
                 {
-                    writer.WriteLine("fail");
+                    writer.WriteLine("endofxml");
                 }
             }
             catch (Exception)

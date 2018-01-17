@@ -48,3 +48,17 @@ C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assi
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\fkin yifan\WAD-Server\obj\Debug\WAD-Server.exe
 C:\Users\seanm_000\Downloads\3.2 (WAD) Windows Applications Development\WAD Assignment\fkin yifan\WAD-Server\obj\Debug\WAD-Server.pdb
 D:\Visual Studio Projects\WAD-Server\WAD-Server\obj\Debug\WAD_Server.ViewSeatsForm.resources
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\bin\Debug\WAD-Server.exe.config
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\bin\Debug\WAD-Server.exe
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\bin\Debug\WAD-Server.pdb
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD-Server.csprojResolveAssemblyReference.cache
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD_Server.AddMovieForm.resources
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD_Server.Form1.resources
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD_Server.Properties.Resources.resources
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD_Server.ViewBookingForm.resources
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD_Server.ViewMovieBookingForm.resources
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD_Server.ViewSeatsForm.resources
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD-Server.csproj.GenerateResource.Cache
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD-Server.csproj.CoreCompileInputs.cache
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD-Server.exe
+C:\Users\chenyifan\Desktop\WAD-Server\WAD-Server\obj\Debug\WAD-Server.pdb
